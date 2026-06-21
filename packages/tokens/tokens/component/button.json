@@ -1,0 +1,14 @@
+{
+  "button": {
+    "radius":      { "$value": "{radius.md}",          "$type": "dimension" },
+    "paddingX":    { "$value": "{space.4}",            "$type": "dimension" },
+    "paddingY":    { "$value": "{space.2}",            "$type": "dimension" },
+    "bg": {
+      "primary":      { "$value": "{color.accent.default}", "$type": "color" },
+      "primaryHover": { "$value": "{color.accent.hover}",   "$type": "color" }
+    },
+    "fg": {
+      "primary": { "$value": "{color.fg.onAccent}", "$type": "color" }
+    }
+  }
+}

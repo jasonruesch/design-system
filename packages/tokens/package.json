@@ -1,0 +1,24 @@
+{
+  "name": "@ds/tokens",
+  "version": "0.0.0",
+  "private": false,
+  "type": "module",
+  "license": "MIT",
+  "exports": {
+    ".": {
+      "types": "./dist/ts/tokens.d.ts",
+      "import": "./dist/ts/tokens.js"
+    },
+    "./css": "./dist/css/index.css",
+    "./css/*": "./dist/css/*"
+  },
+  "files": ["dist"],
+  "scripts": {
+    "tokens:build": "node config.mjs",
+    "build": "node config.mjs",
+    "clean": "rm -rf dist"
+  },
+  "devDependencies": {
+    "style-dictionary": "^5.5.0"
+  }
+}
