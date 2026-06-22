@@ -1,6 +1,6 @@
 {
   "name": "@jasonruesch/tokens",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "private": false,
   "type": "module",
   "license": "MIT",
@@ -12,7 +12,9 @@
     "./css": "./dist/css/index.css",
     "./css/*": "./dist/css/*"
   },
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "tokens:build": "node config.mjs",
     "build": "node config.mjs",
