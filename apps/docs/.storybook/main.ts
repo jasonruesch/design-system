@@ -2,7 +2,7 @@ import type { StorybookConfig } from "@storybook/react-vite";
 import tailwindcss from "@tailwindcss/vite";
 
 const config: StorybookConfig = {
-  // Stories are co-located with each component in @ds/react.
+  // Stories are co-located with each component in @jasonruesch/react.
   stories: ["../../../packages/react/src/**/*.stories.@(ts|tsx)"],
   addons: ["@storybook/addon-docs", "@storybook/addon-a11y"],
   framework: {

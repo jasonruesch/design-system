@@ -1,5 +1,5 @@
 {
-  "name": "@ds/docs",
+  "name": "@jasonruesch/docs",
   "version": "0.0.0",
   "private": true,
   "type": "module",
@@ -9,13 +9,13 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@ds/react": "workspace:*",
-    "@ds/tokens": "workspace:*",
+    "@jasonruesch/react": "workspace:*",
+    "@jasonruesch/tokens": "workspace:*",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   },
   "devDependencies": {
-    "@ds/tsconfig": "workspace:*",
+    "@jasonruesch/tsconfig": "workspace:*",
     "@storybook/addon-a11y": "^10.4.6",
     "@storybook/addon-docs": "^10.4.6",
     "@storybook/react-vite": "^10.4.6",

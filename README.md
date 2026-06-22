@@ -17,22 +17,22 @@ documented in Storybook.
 
 ```
 packages/
-  tokens/   @ds/tokens — DTCG tokens + Style Dictionary build (CSS vars + TS)
-  react/    @ds/react  — ~30 components, compiled JS/types + styles.css
+  tokens/   @jasonruesch/tokens — DTCG tokens + Style Dictionary build (CSS vars + TS)
+  react/    @jasonruesch/react  — ~30 components, compiled JS/types + styles.css
 apps/
-  docs/     @ds/docs   — Storybook (React + Vite) with theme/brand toolbar
+  docs/     @jasonruesch/docs   — Storybook (React + Vite) with theme/brand toolbar
 tooling/
   eslint-config/        shared flat ESLint config (+ jsx-a11y)
   tsconfig/             shared TypeScript configs
 ```
 
-Orchestrated with Turborepo; `@ds/react` and `apps/docs` depend on `@ds/tokens`.
+Orchestrated with Turborepo; `@jasonruesch/react` and `apps/docs` depend on `@jasonruesch/tokens`.
 
 ## Usage
 
 ```ts
-import "@ds/react/styles.css";
-import { Button, Dialog, DialogTrigger, DialogContent } from "@ds/react";
+import "@jasonruesch/react/styles.css";
+import { Button, Dialog, DialogTrigger, DialogContent } from "@jasonruesch/react";
 ```
 
 Set the theme/brand on the document (or any subtree):
@@ -47,12 +47,27 @@ Set the theme/brand on the document (or any subtree):
 | ---------------------- | ---------------------------------------------------- |
 | `pnpm install`         | Install the workspace                                |
 | `pnpm tokens:build`    | Generate token CSS + TS into `packages/tokens/dist`  |
-| `pnpm build`           | Build tokens, then `@ds/react` (JS, types, CSS)      |
+| `pnpm build`           | Build tokens, then `@jasonruesch/react` (JS, types, CSS)      |
 | `pnpm test`            | Vitest + Testing Library + axe a11y checks           |
 | `pnpm lint`            | ESLint (incl. `jsx-a11y`)                            |
 | `pnpm typecheck`       | TypeScript across all packages                       |
 | `pnpm storybook`       | Run Storybook dev server (port 6006)                 |
 | `pnpm build-storybook` | Build the static docs site                           |
+
+## Releasing
+
+Publishing is automated with [Changesets](https://github.com/changesets/changesets)
+and the [`.github/workflows/release.yml`](.github/workflows/release.yml) workflow.
+
+1. With your change, add a changeset: `pnpm changeset` (pick the packages and
+   bump type, write a summary). Commit the generated file in `.changeset/`.
+2. On merge to `main`, the workflow opens (or updates) a **"chore: release
+   packages"** PR that applies the version bumps and changelogs.
+3. Merging that PR builds the packages and publishes `@jasonruesch/react` and
+   `@jasonruesch/tokens` to npm.
+
+Requires an `NPM_TOKEN` repository secret (an npm automation/granular token with
+publish access). The packages publish under `--access public` with provenance.
 
 ## Components
 

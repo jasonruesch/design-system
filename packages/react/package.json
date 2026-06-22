@@ -1,5 +1,5 @@
 {
-  "name": "@ds/react",
+  "name": "@jasonruesch/react",
   "version": "0.0.0",
   "private": false,
   "type": "module",
@@ -52,9 +52,9 @@
     "tailwind-merge": "^3.6.0"
   },
   "devDependencies": {
-    "@ds/eslint-config": "workspace:*",
-    "@ds/tokens": "workspace:*",
-    "@ds/tsconfig": "workspace:*",
+    "@jasonruesch/eslint-config": "workspace:*",
+    "@jasonruesch/tokens": "workspace:*",
+    "@jasonruesch/tsconfig": "workspace:*",
     "@storybook/react-vite": "^10.4.6",
     "@tailwindcss/cli": "^4.3.1",
     "@testing-library/jest-dom": "^6.6.3",
