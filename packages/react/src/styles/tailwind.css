@@ -1,6 +1,6 @@
 @import "tailwindcss";
 @import "tw-animate-css";
-@import "@ds/tokens/css";
+@import "@jasonruesch/tokens/css";
 
 /* Scan component sources for utility usage. */
 @source "../**/*.{ts,tsx}";
