@@ -31,7 +31,7 @@ export const TabsTrigger = forwardRef<
     <TabsPrimitive.Trigger
       ref={ref}
       className={cn(
-        "-mb-px inline-flex items-center whitespace-nowrap border-b-2 border-transparent px-3 py-2 text-sm font-medium text-fg-muted transition-colors",
+        "-mb-px inline-flex items-center border-b-2 border-transparent px-3 py-2 text-sm font-medium whitespace-nowrap text-fg-muted transition-colors",
         "hover:text-fg",
         "data-[state=active]:border-accent data-[state=active]:text-fg",
         "disabled:pointer-events-none disabled:opacity-50",

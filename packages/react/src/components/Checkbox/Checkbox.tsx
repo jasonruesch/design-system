@@ -15,8 +15,8 @@ export const Checkbox = forwardRef<HTMLButtonElement, CheckboxProps>(
         ref={ref}
         className={cn(
           "peer size-5 shrink-0 rounded-sm border border-line bg-canvas transition-colors",
-          "data-[state=checked]:bg-accent data-[state=checked]:border-accent data-[state=checked]:text-on-accent",
-          "data-[state=indeterminate]:bg-accent data-[state=indeterminate]:border-accent data-[state=indeterminate]:text-on-accent",
+          "data-[state=checked]:border-accent data-[state=checked]:bg-accent data-[state=checked]:text-on-accent",
+          "data-[state=indeterminate]:border-accent data-[state=indeterminate]:bg-accent data-[state=indeterminate]:text-on-accent",
           "disabled:cursor-not-allowed disabled:opacity-50",
           focusRing,
           className,

@@ -37,7 +37,7 @@ export const CardTitle = forwardRef<
   return (
     <h3
       ref={ref}
-      className={cn("text-lg font-semibold leading-tight", className)}
+      className={cn("text-lg leading-tight font-semibold", className)}
       {...props}
     >
       {children}

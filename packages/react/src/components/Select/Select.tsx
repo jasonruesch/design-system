@@ -20,7 +20,7 @@ export const SelectTrigger = forwardRef<HTMLButtonElement, SelectTriggerProps>(
         ref={ref}
         className={cn(
           "flex h-10 w-full items-center justify-between gap-2 rounded-md border border-line bg-canvas px-3 text-sm text-fg",
-          "data-[placeholder]:text-fg-subtle transition-colors",
+          "transition-colors data-[placeholder]:text-fg-subtle",
           "disabled:cursor-not-allowed disabled:opacity-50",
           "aria-invalid:border-danger",
           focusRing,
@@ -67,7 +67,7 @@ export const SelectContent = forwardRef<HTMLDivElement, SelectContentProps>(
           position={position}
           className={cn(
             "relative z-50 max-h-(--radix-select-content-available-height) min-w-32 overflow-hidden rounded-md border border-line bg-canvas text-fg shadow-md",
-            "data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
+            "data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:animate-in data-[state=open]:fade-in-0",
             position === "popper" &&
               "w-full min-w-(--radix-select-trigger-width)",
             className,
@@ -94,7 +94,7 @@ export const SelectItem = forwardRef<HTMLDivElement, SelectItemProps>(
       <SelectPrimitive.Item
         ref={ref}
         className={cn(
-          "relative flex w-full cursor-default select-none items-center rounded-sm py-1.5 pl-8 pr-2 text-sm outline-none",
+          "relative flex w-full cursor-default items-center rounded-sm py-1.5 pr-2 pl-8 text-sm outline-none select-none",
           "data-[highlighted]:bg-muted data-[highlighted]:outline-none",
           "data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
           className,

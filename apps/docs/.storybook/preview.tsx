@@ -19,7 +19,7 @@ const withTheme: Decorator = (Story, context) => {
   }, [theme, brand]);
 
   return (
-    <div className="bg-canvas text-fg min-h-svh p-6">
+    <div className="min-h-svh bg-canvas p-6 text-fg">
       <Story />
     </div>
   );

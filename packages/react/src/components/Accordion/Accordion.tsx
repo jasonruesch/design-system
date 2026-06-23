@@ -66,12 +66,12 @@ export const AccordionContent = forwardRef<
       ref={ref}
       className={cn(
         "overflow-hidden text-sm text-fg-muted",
-        "data-[state=open]:animate-accordion-down data-[state=closed]:animate-accordion-up",
+        "data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down",
         className,
       )}
       {...props}
     >
-      <div className="pb-4 pt-0">{children}</div>
+      <div className="pt-0 pb-4">{children}</div>
     </AccordionPrimitive.Content>
   );
 });
