@@ -4,7 +4,7 @@ import { cn } from "../../utils/cn";
 import { focusRing } from "../../utils/focus";
 import { useFieldControl } from "../Field";
 
-const input = cva(
+export const inputVariants = cva(
   cn(
     "flex w-full rounded-md border bg-canvas text-fg placeholder:text-fg-subtle",
     "transition-colors disabled:cursor-not-allowed disabled:opacity-50",
@@ -28,8 +28,9 @@ const input = cva(
 );
 
 export interface InputProps
-  extends Omit<ComponentPropsWithoutRef<"input">, "size">,
-    VariantProps<typeof input> {}
+  extends
+    Omit<ComponentPropsWithoutRef<"input">, "size">,
+    VariantProps<typeof inputVariants> {}
 
 /** Single-line text input. Inherits accessibility wiring from a parent Field. */
 export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
@@ -40,7 +41,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
   return (
     <input
       ref={ref}
-      className={cn(input({ size, tone }), className)}
+      className={cn(inputVariants({ size, tone }), className)}
       {...props}
       {...fieldProps}
     />

@@ -1,8 +1,12 @@
-import { forwardRef, type ElementType, type ComponentPropsWithoutRef } from "react";
+import {
+  forwardRef,
+  type ElementType,
+  type ComponentPropsWithoutRef,
+} from "react";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "../../utils/cn";
 
-const text = cva("", {
+export const textVariants = cva("", {
   variants: {
     size: {
       xs: "text-xs",
@@ -38,20 +42,31 @@ const text = cva("", {
 });
 
 export interface TextProps
-  extends ComponentPropsWithoutRef<"p">,
-    VariantProps<typeof text> {
+  extends ComponentPropsWithoutRef<"p">, VariantProps<typeof textVariants> {
   as?: ElementType;
 }
 
 /** Body text with token-driven size, weight, and tone. */
 export const Text = forwardRef<HTMLParagraphElement, TextProps>(function Text(
-  { as: Component = "p", className, size, weight, tone, align, truncate, ...props },
+  {
+    as: Component = "p",
+    className,
+    size,
+    weight,
+    tone,
+    align,
+    truncate,
+    ...props
+  },
   ref,
 ) {
   return (
     <Component
       ref={ref}
-      className={cn(text({ size, weight, tone, align, truncate }), className)}
+      className={cn(
+        textVariants({ size, weight, tone, align, truncate }),
+        className,
+      )}
       {...props}
     />
   );

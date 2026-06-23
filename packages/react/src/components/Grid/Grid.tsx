@@ -1,8 +1,12 @@
-import { forwardRef, type ElementType, type ComponentPropsWithoutRef } from "react";
+import {
+  forwardRef,
+  type ElementType,
+  type ComponentPropsWithoutRef,
+} from "react";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "../../utils/cn";
 
-const grid = cva("grid", {
+export const gridVariants = cva("grid", {
   variants: {
     cols: {
       1: "grid-cols-1",
@@ -26,8 +30,7 @@ const grid = cva("grid", {
 });
 
 export interface GridProps
-  extends ComponentPropsWithoutRef<"div">,
-    VariantProps<typeof grid> {
+  extends ComponentPropsWithoutRef<"div">, VariantProps<typeof gridVariants> {
   as?: ElementType;
 }
 
@@ -37,6 +40,10 @@ export const Grid = forwardRef<HTMLDivElement, GridProps>(function Grid(
   ref,
 ) {
   return (
-    <Component ref={ref} className={cn(grid({ cols, gap }), className)} {...props} />
+    <Component
+      ref={ref}
+      className={cn(gridVariants({ cols, gap }), className)}
+      {...props}
+    />
   );
 });

@@ -1,8 +1,12 @@
-import { forwardRef, type ElementType, type ComponentPropsWithoutRef } from "react";
+import {
+  forwardRef,
+  type ElementType,
+  type ComponentPropsWithoutRef,
+} from "react";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "../../utils/cn";
 
-const inline = cva("flex flex-row", {
+export const inlineVariants = cva("flex flex-row", {
   variants: {
     gap: {
       0: "gap-0",
@@ -34,8 +38,9 @@ const inline = cva("flex flex-row", {
 });
 
 export interface InlineProps
-  extends Omit<ComponentPropsWithoutRef<"div">, "wrap">,
-    VariantProps<typeof inline> {
+  extends
+    Omit<ComponentPropsWithoutRef<"div">, "wrap">,
+    VariantProps<typeof inlineVariants> {
   as?: ElementType;
 }
 
@@ -47,7 +52,7 @@ export const Inline = forwardRef<HTMLDivElement, InlineProps>(function Inline(
   return (
     <Component
       ref={ref}
-      className={cn(inline({ gap, align, justify, wrap }), className)}
+      className={cn(inlineVariants({ gap, align, justify, wrap }), className)}
       {...props}
     />
   );

@@ -3,7 +3,7 @@ import * as AvatarPrimitive from "@radix-ui/react-avatar";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "../../utils/cn";
 
-const avatar = cva(
+export const avatarVariants = cva(
   "relative flex shrink-0 overflow-hidden rounded-full bg-muted",
   {
     variants: {
@@ -18,8 +18,9 @@ const avatar = cva(
 );
 
 export interface AvatarProps
-  extends ComponentPropsWithoutRef<typeof AvatarPrimitive.Root>,
-    VariantProps<typeof avatar> {}
+  extends
+    ComponentPropsWithoutRef<typeof AvatarPrimitive.Root>,
+    VariantProps<typeof avatarVariants> {}
 
 /** User/entity image with a graceful text fallback (Radix). */
 export const Avatar = forwardRef<HTMLSpanElement, AvatarProps>(function Avatar(
@@ -29,7 +30,7 @@ export const Avatar = forwardRef<HTMLSpanElement, AvatarProps>(function Avatar(
   return (
     <AvatarPrimitive.Root
       ref={ref}
-      className={cn(avatar({ size }), className)}
+      className={cn(avatarVariants({ size }), className)}
       {...props}
     />
   );

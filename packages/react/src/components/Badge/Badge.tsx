@@ -2,7 +2,7 @@ import { forwardRef, type ComponentPropsWithoutRef } from "react";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "../../utils/cn";
 
-const badge = cva(
+export const badgeVariants = cva(
   "inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 text-xs font-medium whitespace-nowrap",
   {
     variants: {
@@ -20,13 +20,20 @@ const badge = cva(
 );
 
 export interface BadgeProps
-  extends ComponentPropsWithoutRef<"span">,
-    VariantProps<typeof badge> {}
+  extends
+    ComponentPropsWithoutRef<"span">,
+    VariantProps<typeof badgeVariants> {}
 
 /** Compact status or category label. */
 export const Badge = forwardRef<HTMLSpanElement, BadgeProps>(function Badge(
   { className, variant, ...props },
   ref,
 ) {
-  return <span ref={ref} className={cn(badge({ variant }), className)} {...props} />;
+  return (
+    <span
+      ref={ref}
+      className={cn(badgeVariants({ variant }), className)}
+      {...props}
+    />
+  );
 });

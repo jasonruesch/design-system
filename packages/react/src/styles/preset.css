@@ -1,0 +1,135 @@
+/*
+ * @jasonruesch/react Tailwind preset
+ * ----------------------------------
+ * Importable theme/token layer for consumers who compile the design system with
+ * their OWN Tailwind v4 build (instead of, or alongside, the prebuilt
+ * `@jasonruesch/react/styles.css`).
+ *
+ * Usage (consumer's Tailwind entry):
+ *
+ *   @import "tailwindcss";
+ *   @import "@jasonruesch/react/preset.css";
+ *   @source "./node_modules/@jasonruesch/react/dist"; // emit component classes
+ *
+ * Provides the `--ds-*` token variables (with data-theme / data-brand switching),
+ * the `dark` variant, the semantic `@theme` utility mappings (`bg-accent`,
+ * `text-fg`, …), accordion keyframes, and base canvas defaults.
+ *
+ * NOTE: this file intentionally does NOT `@import "tailwindcss"` — the consumer
+ * supplies that. It is shipped as source and processed by the consumer's
+ * Tailwind, not by ours.
+ */
+
+@import "tw-animate-css";
+@import "@jasonruesch/tokens/css";
+
+/* Dark mode is driven by [data-theme~="dark"] on an ancestor (set by the host). */
+@custom-variant dark (&:where([data-theme~="dark"], [data-theme~="dark"] *));
+
+/*
+ * Map design-system semantic tokens onto Tailwind's theme namespace so that
+ * utilities resolve to CSS variables: e.g. `bg-canvas` -> var(--color-canvas)
+ * -> var(--ds-color-bg-default), which swaps per data-theme / data-brand.
+ */
+@theme {
+  /* Surfaces */
+  --color-canvas: var(--ds-color-bg-default);
+  --color-surface: var(--ds-color-bg-subtle);
+  --color-muted: var(--ds-color-bg-muted);
+  --color-emphasis: var(--ds-color-bg-emphasis);
+  --color-inverse: var(--ds-color-bg-inverse);
+
+  /* Foreground / text */
+  --color-fg: var(--ds-color-fg-default);
+  --color-fg-muted: var(--ds-color-fg-muted);
+  --color-fg-subtle: var(--ds-color-fg-subtle);
+  --color-on-emphasis: var(--ds-color-fg-on-emphasis);
+  --color-on-accent: var(--ds-color-fg-on-accent);
+
+  /* Borders */
+  --color-line: var(--ds-color-border-default);
+  --color-line-muted: var(--ds-color-border-muted);
+  --color-line-strong: var(--ds-color-border-strong);
+
+  /* Accent (brand-swappable) */
+  --color-accent: var(--ds-color-accent-default);
+  --color-accent-hover: var(--ds-color-accent-hover);
+  --color-accent-active: var(--ds-color-accent-active);
+  --color-accent-subtle: var(--ds-color-accent-subtle);
+  --color-accent-fg: var(--ds-color-accent-fg);
+
+  /* Status: success / warning / danger */
+  --color-success: var(--ds-color-success-default);
+  --color-success-fg: var(--ds-color-success-fg);
+  --color-success-subtle: var(--ds-color-success-subtle);
+  --color-success-border: var(--ds-color-success-border);
+
+  --color-warning: var(--ds-color-warning-default);
+  --color-warning-fg: var(--ds-color-warning-fg);
+  --color-warning-subtle: var(--ds-color-warning-subtle);
+  --color-warning-border: var(--ds-color-warning-border);
+
+  --color-danger: var(--ds-color-danger-default);
+  --color-danger-hover: var(--ds-color-danger-hover);
+  --color-danger-fg: var(--ds-color-danger-fg);
+  --color-danger-subtle: var(--ds-color-danger-subtle);
+  --color-danger-border: var(--ds-color-danger-border);
+
+  /* Focus ring */
+  --color-focus: var(--ds-color-focus-ring);
+
+  /* Radii (semantic-ish, layered on primitives) */
+  --radius-sm: var(--ds-radius-sm);
+  --radius-md: var(--ds-radius-md);
+  --radius-lg: var(--ds-radius-lg);
+  --radius-xl: var(--ds-radius-xl);
+
+  /* Typography */
+  --font-sans: var(--ds-font-family-sans);
+  --font-mono: var(--ds-font-family-mono);
+
+  --text-xs: var(--ds-font-size-xs);
+  --text-sm: var(--ds-font-size-sm);
+  --text-md: var(--ds-font-size-md);
+  --text-lg: var(--ds-font-size-lg);
+  --text-xl: var(--ds-font-size-xl);
+  --text-2xl: var(--ds-font-size-2xl);
+  --text-3xl: var(--ds-font-size-3xl);
+  --text-4xl: var(--ds-font-size-4xl);
+
+  /* Shadows */
+  --shadow-sm: var(--ds-shadow-sm);
+  --shadow-md: var(--ds-shadow-md);
+  --shadow-lg: var(--ds-shadow-lg);
+
+  /* Accordion open/close animations (driven by Radix content-height var) */
+  --animate-accordion-down: accordion-down 0.2s ease-out;
+  --animate-accordion-up: accordion-up 0.2s ease-out;
+}
+
+@keyframes accordion-down {
+  from {
+    height: 0;
+  }
+  to {
+    height: var(--radix-accordion-content-height);
+  }
+}
+
+@keyframes accordion-up {
+  from {
+    height: var(--radix-accordion-content-height);
+  }
+  to {
+    height: 0;
+  }
+}
+
+/* Sensible defaults so the base canvas reflects the active theme. */
+@layer base {
+  body {
+    background-color: var(--color-canvas);
+    color: var(--color-fg);
+    font-family: var(--font-sans);
+  }
+}

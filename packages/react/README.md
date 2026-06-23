@@ -31,7 +31,12 @@ Import the stylesheet **once** at your app root, then use components anywhere:
 
 ```tsx
 import "@jasonruesch/react/styles.css";
-import { Button, Dialog, DialogTrigger, DialogContent } from "@jasonruesch/react";
+import {
+  Button,
+  Dialog,
+  DialogTrigger,
+  DialogContent,
+} from "@jasonruesch/react";
 
 export function Example() {
   return (
@@ -48,7 +53,43 @@ export function Example() {
 Set the theme and brand on the document (or any subtree):
 
 ```html
-<html data-theme="dark" data-brand="acme">
+<html data-theme="dark" data-brand="acme"></html>
+```
+
+### Bring your own Tailwind (optional)
+
+If you already run Tailwind CSS v4, you can skip the precompiled `styles.css` and
+instead compile the design system through your own build. Import the **preset**
+into your Tailwind entry — it provides the `--ds-*` token variables (with
+`data-theme` / `data-brand` switching), the `dark` variant, and the semantic
+utility mappings (`bg-accent`, `text-fg`, `rounded-md`, …):
+
+```css
+/* your Tailwind entry, e.g. app.css */
+@import "tailwindcss";
+@import "@jasonruesch/react/preset.css";
+
+/* emit (and purge) the utility classes our components use */
+@source "./node_modules/@jasonruesch/react/dist";
+```
+
+This lets you extend the tokens, reuse the same semantic utilities in your own
+markup, and tree-shake to only the classes you use. Theme/brand switching works
+exactly as above. (Don't import `styles.css` as well — pick one path.)
+
+### Build your own component from a recipe
+
+Every component's [CVA](https://cva.style/) recipe is exported as
+`<name>Variants`, so you can apply the design system's styling to your own
+elements:
+
+```tsx
+import { buttonVariants, inputVariants } from "@jasonruesch/react";
+
+// Style a link like a primary button
+<a href="/start" className={buttonVariants({ variant: "primary", size: "lg" })}>
+  Get started
+</a>;
 ```
 
 ## Components
@@ -64,10 +105,11 @@ A `cn` class-merging utility (clsx + tailwind-merge) is also exported.
 
 ## Exports
 
-| Entry                          | Contents                          |
-| ------------------------------ | --------------------------------- |
-| `@jasonruesch/react`           | Components + `cn` (ESM, CJS, types) |
-| `@jasonruesch/react/styles.css` | Precompiled stylesheet            |
+| Entry                           | Contents                                                 |
+| ------------------------------- | -------------------------------------------------------- |
+| `@jasonruesch/react`            | Components, `*Variants` recipes + `cn` (ESM, CJS, types) |
+| `@jasonruesch/react/styles.css` | Precompiled stylesheet                                   |
+| `@jasonruesch/react/preset.css` | Tailwind v4 token/theme preset (bring your own Tailwind) |
 
 ## License
 

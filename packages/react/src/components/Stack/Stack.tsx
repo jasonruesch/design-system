@@ -1,8 +1,12 @@
-import { forwardRef, type ElementType, type ComponentPropsWithoutRef } from "react";
+import {
+  forwardRef,
+  type ElementType,
+  type ComponentPropsWithoutRef,
+} from "react";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "../../utils/cn";
 
-const stack = cva("flex flex-col", {
+export const stackVariants = cva("flex flex-col", {
   variants: {
     gap: {
       0: "gap-0",
@@ -30,8 +34,7 @@ const stack = cva("flex flex-col", {
 });
 
 export interface StackProps
-  extends ComponentPropsWithoutRef<"div">,
-    VariantProps<typeof stack> {
+  extends ComponentPropsWithoutRef<"div">, VariantProps<typeof stackVariants> {
   as?: ElementType;
 }
 
@@ -43,7 +46,7 @@ export const Stack = forwardRef<HTMLDivElement, StackProps>(function Stack(
   return (
     <Component
       ref={ref}
-      className={cn(stack({ gap, align, justify }), className)}
+      className={cn(stackVariants({ gap, align, justify }), className)}
       {...props}
     />
   );

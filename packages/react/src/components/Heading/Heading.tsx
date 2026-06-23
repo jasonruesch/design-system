@@ -2,25 +2,29 @@ import { forwardRef, type ComponentPropsWithoutRef } from "react";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "../../utils/cn";
 
-const heading = cva("text-fg font-semibold tracking-tight text-balance", {
-  variants: {
-    level: {
-      1: "text-4xl",
-      2: "text-3xl",
-      3: "text-2xl",
-      4: "text-xl",
-      5: "text-lg",
-      6: "text-md",
+export const headingVariants = cva(
+  "text-fg font-semibold tracking-tight text-balance",
+  {
+    variants: {
+      level: {
+        1: "text-4xl",
+        2: "text-3xl",
+        3: "text-2xl",
+        4: "text-xl",
+        5: "text-lg",
+        6: "text-md",
+      },
     },
+    defaultVariants: { level: 2 },
   },
-  defaultVariants: { level: 2 },
-});
+);
 
 type HeadingLevel = 1 | 2 | 3 | 4 | 5 | 6;
 
 export interface HeadingProps
-  extends Omit<ComponentPropsWithoutRef<"h2">, "color">,
-    VariantProps<typeof heading> {
+  extends
+    Omit<ComponentPropsWithoutRef<"h2">, "color">,
+    VariantProps<typeof headingVariants> {
   /** Heading level; also controls the rendered tag unless `as` is set. */
   level?: HeadingLevel;
   /** Override the rendered tag independently of the visual level. */
@@ -34,7 +38,7 @@ export const Heading = forwardRef<HTMLHeadingElement, HeadingProps>(
     return (
       <Component
         ref={ref}
-        className={cn(heading({ level }), className)}
+        className={cn(headingVariants({ level }), className)}
         {...props}
       />
     );

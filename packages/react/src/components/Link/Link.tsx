@@ -3,7 +3,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "../../utils/cn";
 import { focusRing } from "../../utils/focus";
 
-const link = cva(
+export const linkVariants = cva(
   cn("rounded-sm underline-offset-2 transition-colors", focusRing),
   {
     variants: {
@@ -18,8 +18,7 @@ const link = cva(
 );
 
 export interface LinkProps
-  extends ComponentPropsWithoutRef<"a">,
-    VariantProps<typeof link> {}
+  extends ComponentPropsWithoutRef<"a">, VariantProps<typeof linkVariants> {}
 
 /** Styled anchor. Pass `href` and standard anchor attributes. */
 export const Link = forwardRef<HTMLAnchorElement, LinkProps>(function Link(
@@ -27,7 +26,11 @@ export const Link = forwardRef<HTMLAnchorElement, LinkProps>(function Link(
   ref,
 ) {
   return (
-    <a ref={ref} className={cn(link({ variant }), className)} {...props}>
+    <a
+      ref={ref}
+      className={cn(linkVariants({ variant }), className)}
+      {...props}
+    >
       {children}
     </a>
   );

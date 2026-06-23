@@ -4,7 +4,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "../../utils/cn";
 import { focusRing } from "../../utils/focus";
 
-const iconButtonVariants = cva(
+export const iconButtonVariants = cva(
   cn(
     "inline-flex items-center justify-center rounded-md transition-colors select-none",
     "disabled:pointer-events-none disabled:opacity-50",
@@ -29,7 +29,8 @@ const iconButtonVariants = cva(
 );
 
 export interface IconButtonProps
-  extends ComponentPropsWithoutRef<"button">,
+  extends
+    ComponentPropsWithoutRef<"button">,
     VariantProps<typeof iconButtonVariants> {
   /** Accessible label; required since the button has no text content. */
   "aria-label": string;

@@ -1,8 +1,12 @@
-import { forwardRef, type ElementType, type ComponentPropsWithoutRef } from "react";
+import {
+  forwardRef,
+  type ElementType,
+  type ComponentPropsWithoutRef,
+} from "react";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "../../utils/cn";
 
-const container = cva("mx-auto w-full px-4", {
+export const containerVariants = cva("mx-auto w-full px-4", {
   variants: {
     size: {
       sm: "max-w-screen-sm",
@@ -16,18 +20,22 @@ const container = cva("mx-auto w-full px-4", {
 });
 
 export interface ContainerProps
-  extends ComponentPropsWithoutRef<"div">,
-    VariantProps<typeof container> {
+  extends
+    ComponentPropsWithoutRef<"div">,
+    VariantProps<typeof containerVariants> {
   as?: ElementType;
 }
 
 /** Horizontally-centered, max-width page container with responsive padding. */
 export const Container = forwardRef<HTMLDivElement, ContainerProps>(
-  function Container({ as: Component = "div", className, size, ...props }, ref) {
+  function Container(
+    { as: Component = "div", className, size, ...props },
+    ref,
+  ) {
     return (
       <Component
         ref={ref}
-        className={cn(container({ size }), className)}
+        className={cn(containerVariants({ size }), className)}
         {...props}
       />
     );
