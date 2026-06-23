@@ -30,6 +30,11 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      # Build first so dist artifacts (e.g. @jasonruesch/tokens/css, consumed by
+      # the Tailwind stylesheet) exist before the checks that resolve them.
+      - name: Build
+        run: pnpm build
+
       - name: Format check
         run: pnpm format:check
 
@@ -41,6 +46,3 @@ jobs:
 
       - name: Test
         run: pnpm test
-
-      - name: Build
-        run: pnpm build
