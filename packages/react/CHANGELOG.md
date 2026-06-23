@@ -1,5 +1,11 @@
 # @jasonruesch/react
 
+## 0.3.0
+
+### Minor Changes
+
+- [`8ababe6`](https://github.com/jasonruesch/design-system/commit/8ababe6ce453ba5407f30009682681326a2da665) Thanks [@jasonruesch](https://github.com/jasonruesch)! - Add an `asChild` prop to `Link`, letting consumers render a third-party link component (such as React Router's `Link`) as the base while keeping the design-system styling.
+
 ## 0.2.0
 
 ### Minor Changes
