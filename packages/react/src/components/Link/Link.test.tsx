@@ -23,6 +23,19 @@ describe("Link", () => {
     );
   });
 
+  it("renders the child element with merged styling when asChild is set", () => {
+    render(
+      <Link asChild variant="subtle">
+        <a href="/home" data-testid="custom">
+          Home
+        </a>
+      </Link>,
+    );
+    const link = screen.getByTestId("custom");
+    expect(link).toHaveAttribute("href", "/home");
+    expect(link).toHaveClass("text-fg-muted");
+  });
+
   it("has no accessibility violations", async () => {
     const { container } = render(<Link href="/home">Accessible</Link>);
     expect(await checkA11y(container)).toHaveNoViolations();

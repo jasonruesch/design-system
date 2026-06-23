@@ -32,3 +32,16 @@ export const AllVariants: Story = {
     </div>
   ),
 };
+
+/**
+ * Set `asChild` to render a third-party link (such as React Router's `Link`)
+ * as the base while keeping the design-system styling. The child here stands
+ * in for `<RouterLink to="/about">`.
+ */
+export const AsChild: Story = {
+  render: () => (
+    <Link asChild>
+      <a href="#about">Routed link</a>
+    </Link>
+  ),
+};
