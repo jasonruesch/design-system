@@ -2,8 +2,9 @@ import { forwardRef, type ComponentPropsWithoutRef } from "react";
 import * as LabelPrimitive from "@radix-ui/react-label";
 import { cn } from "../../utils/cn";
 
-export interface LabelProps
-  extends ComponentPropsWithoutRef<typeof LabelPrimitive.Root> {
+export interface LabelProps extends ComponentPropsWithoutRef<
+  typeof LabelPrimitive.Root
+> {
   /** Render a required asterisk. */
   required?: boolean;
 }

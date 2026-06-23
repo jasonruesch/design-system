@@ -38,8 +38,9 @@ export function useFieldControl(props: {
     id: props.id ?? field.id,
     required: props.required ?? field.required,
     "aria-describedby":
-      [props["aria-describedby"], field.describedBy].filter(Boolean).join(" ") ||
-      undefined,
+      [props["aria-describedby"], field.describedBy]
+        .filter(Boolean)
+        .join(" ") || undefined,
     "aria-invalid": field.invalid || undefined,
   };
 }
@@ -56,19 +57,35 @@ export interface FieldProps extends ComponentPropsWithoutRef<"div"> {
  * and wires up the accessibility attributes for the control it contains.
  */
 export const Field = forwardRef<HTMLDivElement, FieldProps>(function Field(
-  { className, label, description, error, required = false, children, id, ...props },
+  {
+    className,
+    label,
+    description,
+    error,
+    required = false,
+    children,
+    id,
+    ...props
+  },
   ref,
 ) {
   const generatedId = useId();
   const fieldId = id ?? generatedId;
   const descriptionId = description ? `${fieldId}-description` : undefined;
   const errorId = error ? `${fieldId}-error` : undefined;
-  const describedBy = [descriptionId, errorId].filter(Boolean).join(" ") || undefined;
+  const describedBy =
+    [descriptionId, errorId].filter(Boolean).join(" ") || undefined;
   const invalid = Boolean(error);
 
   return (
-    <FieldContext.Provider value={{ id: fieldId, describedBy, invalid, required }}>
-      <div ref={ref} className={cn("flex flex-col gap-1.5", className)} {...props}>
+    <FieldContext.Provider
+      value={{ id: fieldId, describedBy, invalid, required }}
+    >
+      <div
+        ref={ref}
+        className={cn("flex flex-col gap-1.5", className)}
+        {...props}
+      >
         {label ? (
           <Label htmlFor={fieldId} required={required}>
             {label}

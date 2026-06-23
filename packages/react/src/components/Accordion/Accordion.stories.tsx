@@ -34,11 +34,7 @@ export const Default: Story = {
 
 export const Multiple: Story = {
   render: () => (
-    <Accordion
-      type="multiple"
-      defaultValue={["item-1"]}
-      className="w-96"
-    >
+    <Accordion type="multiple" defaultValue={["item-1"]} className="w-96">
       <AccordionItem value="item-1">
         <AccordionTrigger>First section</AccordionTrigger>
         <AccordionContent>Content for the first section.</AccordionContent>

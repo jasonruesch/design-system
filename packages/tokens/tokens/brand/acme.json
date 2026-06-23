@@ -2,10 +2,10 @@
   "color": {
     "accent": {
       "default": { "$value": "{color.violet.600}", "$type": "color" },
-      "hover":   { "$value": "{color.violet.700}", "$type": "color" },
-      "active":  { "$value": "{color.violet.800}", "$type": "color" },
-      "subtle":  { "$value": "{color.violet.50}",  "$type": "color" },
-      "fg":      { "$value": "{color.violet.700}", "$type": "color" }
+      "hover": { "$value": "{color.violet.700}", "$type": "color" },
+      "active": { "$value": "{color.violet.800}", "$type": "color" },
+      "subtle": { "$value": "{color.violet.50}", "$type": "color" },
+      "fg": { "$value": "{color.violet.700}", "$type": "color" }
     },
     "focus": {
       "ring": { "$value": "{color.violet.600}", "$type": "color" }

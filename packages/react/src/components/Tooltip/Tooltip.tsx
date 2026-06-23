@@ -7,7 +7,9 @@ export const TooltipProvider = TooltipPrimitive.Provider;
 export const Tooltip = TooltipPrimitive.Root;
 export const TooltipTrigger = TooltipPrimitive.Trigger;
 
-export type TooltipContentProps = ComponentPropsWithoutRef<typeof TooltipPrimitive.Content>;
+export type TooltipContentProps = ComponentPropsWithoutRef<
+  typeof TooltipPrimitive.Content
+>;
 
 /** Floating label shown on hover/focus (Radix). */
 export const TooltipContent = forwardRef<HTMLDivElement, TooltipContentProps>(

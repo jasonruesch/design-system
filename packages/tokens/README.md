@@ -31,11 +31,11 @@ Import the full cascade (primitives, light/dark themes, brand, components):
 …or import individual layers:
 
 ```css
-@import "@jasonruesch/tokens/css/variables.css";    /* primitives → :root */
-@import "@jasonruesch/tokens/css/theme-light.css";  /* [data-theme~="light"] */
-@import "@jasonruesch/tokens/css/theme-dark.css";   /* [data-theme~="dark"] */
-@import "@jasonruesch/tokens/css/brand-acme.css";   /* [data-brand="acme"] */
-@import "@jasonruesch/tokens/css/components.css";    /* component layer → :root */
+@import "@jasonruesch/tokens/css/variables.css"; /* primitives → :root */
+@import "@jasonruesch/tokens/css/theme-light.css"; /* [data-theme~="light"] */
+@import "@jasonruesch/tokens/css/theme-dark.css"; /* [data-theme~="dark"] */
+@import "@jasonruesch/tokens/css/brand-acme.css"; /* [data-brand="acme"] */
+@import "@jasonruesch/tokens/css/components.css"; /* component layer → :root */
 ```
 
 Then reference the variables and switch theme/brand on any ancestor element — no
@@ -43,7 +43,9 @@ rebuild required:
 
 ```html
 <html data-theme="dark" data-brand="acme">
-  <button style="background: var(--ds-color-accent-default); color: var(--ds-color-fg-on-accent)">
+  <button
+    style="background: var(--ds-color-accent-default); color: var(--ds-color-fg-on-accent)"
+  >
     Save
   </button>
 </html>
@@ -61,11 +63,11 @@ tokens["color.accent.default"]; // "#2563eb"
 
 ## Exports
 
-| Entry                            | Contents                                          |
-| -------------------------------- | ------------------------------------------------- |
-| `@jasonruesch/tokens`            | Typed `tokens` object + types (`dist/ts`)         |
-| `@jasonruesch/tokens/css`        | Barrel importing every CSS layer in cascade order |
-| `@jasonruesch/tokens/css/*`      | Individual CSS layer files                        |
+| Entry                       | Contents                                          |
+| --------------------------- | ------------------------------------------------- |
+| `@jasonruesch/tokens`       | Typed `tokens` object + types (`dist/ts`)         |
+| `@jasonruesch/tokens/css`   | Barrel importing every CSS layer in cascade order |
+| `@jasonruesch/tokens/css/*` | Individual CSS layer files                        |
 
 ## Build
 

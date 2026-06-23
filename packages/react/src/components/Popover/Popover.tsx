@@ -7,7 +7,9 @@ export const PopoverTrigger = PopoverPrimitive.Trigger;
 export const PopoverAnchor = PopoverPrimitive.Anchor;
 export const PopoverClose = PopoverPrimitive.Close;
 
-export type PopoverContentProps = ComponentPropsWithoutRef<typeof PopoverPrimitive.Content>;
+export type PopoverContentProps = ComponentPropsWithoutRef<
+  typeof PopoverPrimitive.Content
+>;
 
 /** Floating panel anchored to a trigger (Radix). */
 export const PopoverContent = forwardRef<HTMLDivElement, PopoverContentProps>(

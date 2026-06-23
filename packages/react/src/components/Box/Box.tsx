@@ -1,4 +1,8 @@
-import { forwardRef, type ElementType, type ComponentPropsWithoutRef } from "react";
+import {
+  forwardRef,
+  type ElementType,
+  type ComponentPropsWithoutRef,
+} from "react";
 import { cn } from "../../utils/cn";
 
 export interface BoxProps extends ComponentPropsWithoutRef<"div"> {

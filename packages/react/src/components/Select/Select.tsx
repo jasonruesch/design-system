@@ -8,7 +8,9 @@ export const Select = SelectPrimitive.Root;
 export const SelectGroup = SelectPrimitive.Group;
 export const SelectValue = SelectPrimitive.Value;
 
-export type SelectTriggerProps = ComponentPropsWithoutRef<typeof SelectPrimitive.Trigger>;
+export type SelectTriggerProps = ComponentPropsWithoutRef<
+  typeof SelectPrimitive.Trigger
+>;
 
 /** Button that opens the select listbox. */
 export const SelectTrigger = forwardRef<HTMLButtonElement, SelectTriggerProps>(
@@ -28,8 +30,19 @@ export const SelectTrigger = forwardRef<HTMLButtonElement, SelectTriggerProps>(
       >
         {children}
         <SelectPrimitive.Icon asChild>
-          <svg viewBox="0 0 16 16" className="size-4 opacity-60" fill="none" aria-hidden="true">
-            <path d="M4 6l4 4 4-4" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" />
+          <svg
+            viewBox="0 0 16 16"
+            className="size-4 opacity-60"
+            fill="none"
+            aria-hidden="true"
+          >
+            <path
+              d="M4 6l4 4 4-4"
+              stroke="currentColor"
+              strokeWidth="1.75"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
           </svg>
         </SelectPrimitive.Icon>
       </SelectPrimitive.Trigger>
@@ -37,11 +50,16 @@ export const SelectTrigger = forwardRef<HTMLButtonElement, SelectTriggerProps>(
   },
 );
 
-export type SelectContentProps = ComponentPropsWithoutRef<typeof SelectPrimitive.Content>;
+export type SelectContentProps = ComponentPropsWithoutRef<
+  typeof SelectPrimitive.Content
+>;
 
 /** Floating listbox panel. Rendered in a portal. */
 export const SelectContent = forwardRef<HTMLDivElement, SelectContentProps>(
-  function SelectContent({ className, children, position = "popper", ...props }, ref) {
+  function SelectContent(
+    { className, children, position = "popper", ...props },
+    ref,
+  ) {
     return (
       <SelectPrimitive.Portal>
         <SelectPrimitive.Content
@@ -50,7 +68,8 @@ export const SelectContent = forwardRef<HTMLDivElement, SelectContentProps>(
           className={cn(
             "relative z-50 max-h-(--radix-select-content-available-height) min-w-32 overflow-hidden rounded-md border border-line bg-canvas text-fg shadow-md",
             "data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
-            position === "popper" && "w-full min-w-(--radix-select-trigger-width)",
+            position === "popper" &&
+              "w-full min-w-(--radix-select-trigger-width)",
             className,
           )}
           {...props}
@@ -64,7 +83,9 @@ export const SelectContent = forwardRef<HTMLDivElement, SelectContentProps>(
   },
 );
 
-export type SelectItemProps = ComponentPropsWithoutRef<typeof SelectPrimitive.Item>;
+export type SelectItemProps = ComponentPropsWithoutRef<
+  typeof SelectPrimitive.Item
+>;
 
 /** A selectable option. */
 export const SelectItem = forwardRef<HTMLDivElement, SelectItemProps>(
@@ -82,8 +103,19 @@ export const SelectItem = forwardRef<HTMLDivElement, SelectItemProps>(
       >
         <span className="absolute left-2 flex size-4 items-center justify-center">
           <SelectPrimitive.ItemIndicator>
-            <svg viewBox="0 0 16 16" className="size-3.5" fill="none" aria-hidden="true">
-              <path d="M13 4.5L6.5 11L3 7.5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+            <svg
+              viewBox="0 0 16 16"
+              className="size-3.5"
+              fill="none"
+              aria-hidden="true"
+            >
+              <path
+                d="M13 4.5L6.5 11L3 7.5"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
             </svg>
           </SelectPrimitive.ItemIndicator>
         </span>

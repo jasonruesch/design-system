@@ -14,7 +14,8 @@ export const buttonVariants = cva(
   {
     variants: {
       variant: {
-        primary: "bg-accent text-on-accent hover:bg-accent-hover active:bg-accent-active",
+        primary:
+          "bg-accent text-on-accent hover:bg-accent-hover active:bg-accent-active",
         secondary: "bg-muted text-fg hover:bg-surface border border-line",
         outline: "border border-line bg-transparent text-fg hover:bg-muted",
         ghost: "bg-transparent text-fg hover:bg-muted",
@@ -32,7 +33,8 @@ export const buttonVariants = cva(
 );
 
 export interface ButtonProps
-  extends ComponentPropsWithoutRef<"button">,
+  extends
+    ComponentPropsWithoutRef<"button">,
     VariantProps<typeof buttonVariants> {
   /** Merge props onto the child element instead of rendering a `<button>`. */
   asChild?: boolean;
@@ -41,30 +43,42 @@ export interface ButtonProps
 }
 
 /** Primary interactive control with token-driven variants. */
-export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button(
-  { className, variant, size, fullWidth, asChild, loading, disabled, children, ...props },
-  ref,
-) {
-  const Component = asChild ? Slot : "button";
-  return (
-    <Component
-      ref={ref}
-      className={cn(buttonVariants({ variant, size, fullWidth }), className)}
-      disabled={disabled || loading}
-      aria-busy={loading || undefined}
-      {...props}
-    >
-      {loading ? (
-        <>
-          <Spinner />
-          {children}
-        </>
-      ) : (
-        children
-      )}
-    </Component>
-  );
-});
+export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
+  function Button(
+    {
+      className,
+      variant,
+      size,
+      fullWidth,
+      asChild,
+      loading,
+      disabled,
+      children,
+      ...props
+    },
+    ref,
+  ) {
+    const Component = asChild ? Slot : "button";
+    return (
+      <Component
+        ref={ref}
+        className={cn(buttonVariants({ variant, size, fullWidth }), className)}
+        disabled={disabled || loading}
+        aria-busy={loading || undefined}
+        {...props}
+      >
+        {loading ? (
+          <>
+            <Spinner />
+            {children}
+          </>
+        ) : (
+          children
+        )}
+      </Component>
+    );
+  },
+);
 
 function Spinner() {
   return (
@@ -74,8 +88,19 @@ function Spinner() {
       fill="none"
       aria-hidden="true"
     >
-      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z" />
+      <circle
+        className="opacity-25"
+        cx="12"
+        cy="12"
+        r="10"
+        stroke="currentColor"
+        strokeWidth="4"
+      />
+      <path
+        className="opacity-75"
+        fill="currentColor"
+        d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
+      />
     </svg>
   );
 }

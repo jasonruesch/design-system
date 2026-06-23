@@ -43,7 +43,13 @@ export const AccordionTrigger = forwardRef<
           fill="none"
           aria-hidden="true"
         >
-          <path d="M4 6l4 4 4-4" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" />
+          <path
+            d="M4 6l4 4 4-4"
+            stroke="currentColor"
+            strokeWidth="1.75"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
         </svg>
       </AccordionPrimitive.Trigger>
     </AccordionPrimitive.Header>

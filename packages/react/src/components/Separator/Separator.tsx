@@ -2,7 +2,9 @@ import { forwardRef, type ComponentPropsWithoutRef } from "react";
 import * as SeparatorPrimitive from "@radix-ui/react-separator";
 import { cn } from "../../utils/cn";
 
-export type SeparatorProps = ComponentPropsWithoutRef<typeof SeparatorPrimitive.Root>;
+export type SeparatorProps = ComponentPropsWithoutRef<
+  typeof SeparatorPrimitive.Root
+>;
 
 /** Visual or semantic divider (Radix). Defaults to a decorative horizontal rule. */
 export const Separator = forwardRef<HTMLDivElement, SeparatorProps>(

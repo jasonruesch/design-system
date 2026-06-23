@@ -7,7 +7,9 @@ export const DropdownMenuTrigger = DropdownMenuPrimitive.Trigger;
 export const DropdownMenuGroup = DropdownMenuPrimitive.Group;
 export const DropdownMenuPortal = DropdownMenuPrimitive.Portal;
 
-export type DropdownMenuContentProps = ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.Content>;
+export type DropdownMenuContentProps = ComponentPropsWithoutRef<
+  typeof DropdownMenuPrimitive.Content
+>;
 
 /** Menu surface with keyboard navigation (Radix). */
 export const DropdownMenuContent = forwardRef<
@@ -31,34 +33,39 @@ export const DropdownMenuContent = forwardRef<
   );
 });
 
-export interface DropdownMenuItemProps
-  extends ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.Item> {
+export interface DropdownMenuItemProps extends ComponentPropsWithoutRef<
+  typeof DropdownMenuPrimitive.Item
+> {
   inset?: boolean;
 }
 
 /** A selectable menu action. */
-export const DropdownMenuItem = forwardRef<HTMLDivElement, DropdownMenuItemProps>(
-  function DropdownMenuItem({ className, inset, ...props }, ref) {
-    return (
-      <DropdownMenuPrimitive.Item
-        ref={ref}
-        className={cn(
-          "relative flex cursor-default select-none items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-none",
-          "data-[highlighted]:bg-muted data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
-          inset && "pl-8",
-          className,
-        )}
-        {...props}
-      />
-    );
-  },
-);
+export const DropdownMenuItem = forwardRef<
+  HTMLDivElement,
+  DropdownMenuItemProps
+>(function DropdownMenuItem({ className, inset, ...props }, ref) {
+  return (
+    <DropdownMenuPrimitive.Item
+      ref={ref}
+      className={cn(
+        "relative flex cursor-default select-none items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-none",
+        "data-[highlighted]:bg-muted data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
+        inset && "pl-8",
+        className,
+      )}
+      {...props}
+    />
+  );
+});
 
 /** Checkbox item with a leading indicator. */
 export const DropdownMenuCheckboxItem = forwardRef<
   HTMLDivElement,
   ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.CheckboxItem>
->(function DropdownMenuCheckboxItem({ className, children, checked, ...props }, ref) {
+>(function DropdownMenuCheckboxItem(
+  { className, children, checked, ...props },
+  ref,
+) {
   return (
     <DropdownMenuPrimitive.CheckboxItem
       ref={ref}
@@ -72,8 +79,19 @@ export const DropdownMenuCheckboxItem = forwardRef<
     >
       <span className="absolute left-2 flex size-4 items-center justify-center">
         <DropdownMenuPrimitive.ItemIndicator>
-          <svg viewBox="0 0 16 16" className="size-3.5" fill="none" aria-hidden="true">
-            <path d="M13 4.5L6.5 11L3 7.5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+          <svg
+            viewBox="0 0 16 16"
+            className="size-3.5"
+            fill="none"
+            aria-hidden="true"
+          >
+            <path
+              d="M13 4.5L6.5 11L3 7.5"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
           </svg>
         </DropdownMenuPrimitive.ItemIndicator>
       </span>

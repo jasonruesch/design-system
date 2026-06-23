@@ -3,7 +3,9 @@ import * as CheckboxPrimitive from "@radix-ui/react-checkbox";
 import { cn } from "../../utils/cn";
 import { focusRing } from "../../utils/focus";
 
-export type CheckboxProps = ComponentPropsWithoutRef<typeof CheckboxPrimitive.Root>;
+export type CheckboxProps = ComponentPropsWithoutRef<
+  typeof CheckboxPrimitive.Root
+>;
 
 /** Accessible checkbox (Radix) styled with design tokens. */
 export const Checkbox = forwardRef<HTMLButtonElement, CheckboxProps>(
@@ -22,7 +24,12 @@ export const Checkbox = forwardRef<HTMLButtonElement, CheckboxProps>(
         {...props}
       >
         <CheckboxPrimitive.Indicator className="flex items-center justify-center text-current">
-          <svg viewBox="0 0 16 16" className="size-3.5" fill="none" aria-hidden="true">
+          <svg
+            viewBox="0 0 16 16"
+            className="size-3.5"
+            fill="none"
+            aria-hidden="true"
+          >
             <path
               d="M13 4.5L6.5 11L3 7.5"
               stroke="currentColor"

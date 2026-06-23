@@ -26,9 +26,7 @@ function Example() {
 describe("Select", () => {
   it("renders a combobox trigger with an accessible name", () => {
     render(<Example />);
-    expect(
-      screen.getByRole("combobox", { name: "Fruit" }),
-    ).toBeInTheDocument();
+    expect(screen.getByRole("combobox", { name: "Fruit" })).toBeInTheDocument();
   });
 
   it("shows the placeholder while closed", () => {

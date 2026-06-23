@@ -26,7 +26,9 @@ const DialogOverlay = forwardRef<
   );
 });
 
-export type DialogContentProps = ComponentPropsWithoutRef<typeof DialogPrimitive.Content>;
+export type DialogContentProps = ComponentPropsWithoutRef<
+  typeof DialogPrimitive.Content
+>;
 
 /** Modal dialog surface. Radix manages focus trap, Esc, and scroll lock. */
 export const DialogContent = forwardRef<HTMLDivElement, DialogContentProps>(
@@ -53,8 +55,18 @@ export const DialogContent = forwardRef<HTMLDivElement, DialogContentProps>(
             )}
             aria-label="Close"
           >
-            <svg viewBox="0 0 16 16" className="size-4" fill="none" aria-hidden="true">
-              <path d="M4 4l8 8M12 4l-8 8" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" />
+            <svg
+              viewBox="0 0 16 16"
+              className="size-4"
+              fill="none"
+              aria-hidden="true"
+            >
+              <path
+                d="M4 4l8 8M12 4l-8 8"
+                stroke="currentColor"
+                strokeWidth="1.75"
+                strokeLinecap="round"
+              />
             </svg>
           </DialogPrimitive.Close>
         </DialogPrimitive.Content>
@@ -63,12 +75,27 @@ export const DialogContent = forwardRef<HTMLDivElement, DialogContentProps>(
   },
 );
 
-export const DialogHeader = ({ className, ...props }: ComponentPropsWithoutRef<"div">) => (
-  <div className={cn("flex flex-col gap-1.5 text-left", className)} {...props} />
+export const DialogHeader = ({
+  className,
+  ...props
+}: ComponentPropsWithoutRef<"div">) => (
+  <div
+    className={cn("flex flex-col gap-1.5 text-left", className)}
+    {...props}
+  />
 );
 
-export const DialogFooter = ({ className, ...props }: ComponentPropsWithoutRef<"div">) => (
-  <div className={cn("flex flex-col-reverse gap-2 sm:flex-row sm:justify-end", className)} {...props} />
+export const DialogFooter = ({
+  className,
+  ...props
+}: ComponentPropsWithoutRef<"div">) => (
+  <div
+    className={cn(
+      "flex flex-col-reverse gap-2 sm:flex-row sm:justify-end",
+      className,
+    )}
+    {...props}
+  />
 );
 
 export const DialogTitle = forwardRef<

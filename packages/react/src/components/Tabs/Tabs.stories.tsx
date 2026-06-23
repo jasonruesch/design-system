@@ -19,9 +19,7 @@ export const Default: Story = {
       <TabsContent value="account">
         Make changes to your account here.
       </TabsContent>
-      <TabsContent value="password">
-        Change your password here.
-      </TabsContent>
+      <TabsContent value="password">Change your password here.</TabsContent>
       <TabsContent value="team">Manage your team members.</TabsContent>
     </Tabs>
   ),

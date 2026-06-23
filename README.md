@@ -32,27 +32,32 @@ Orchestrated with Turborepo; `@jasonruesch/react` and `apps/docs` depend on `@ja
 
 ```ts
 import "@jasonruesch/react/styles.css";
-import { Button, Dialog, DialogTrigger, DialogContent } from "@jasonruesch/react";
+import {
+  Button,
+  Dialog,
+  DialogTrigger,
+  DialogContent,
+} from "@jasonruesch/react";
 ```
 
 Set the theme/brand on the document (or any subtree):
 
 ```html
-<html data-theme="dark" data-brand="acme">
+<html data-theme="dark" data-brand="acme"></html>
 ```
 
 ## Scripts
 
-| Command                | Description                                          |
-| ---------------------- | ---------------------------------------------------- |
-| `pnpm install`         | Install the workspace                                |
-| `pnpm tokens:build`    | Generate token CSS + TS into `packages/tokens/dist`  |
-| `pnpm build`           | Build tokens, then `@jasonruesch/react` (JS, types, CSS)      |
-| `pnpm test`            | Vitest + Testing Library + axe a11y checks           |
-| `pnpm lint`            | ESLint (incl. `jsx-a11y`)                            |
-| `pnpm typecheck`       | TypeScript across all packages                       |
-| `pnpm storybook`       | Run Storybook dev server (port 6006)                 |
-| `pnpm build-storybook` | Build the static docs site                           |
+| Command                | Description                                              |
+| ---------------------- | -------------------------------------------------------- |
+| `pnpm install`         | Install the workspace                                    |
+| `pnpm tokens:build`    | Generate token CSS + TS into `packages/tokens/dist`      |
+| `pnpm build`           | Build tokens, then `@jasonruesch/react` (JS, types, CSS) |
+| `pnpm test`            | Vitest + Testing Library + axe a11y checks               |
+| `pnpm lint`            | ESLint (incl. `jsx-a11y`)                                |
+| `pnpm typecheck`       | TypeScript across all packages                           |
+| `pnpm storybook`       | Run Storybook dev server (port 6006)                     |
+| `pnpm build-storybook` | Build the static docs site                               |
 
 ## Releasing
 
