@@ -1,5 +1,11 @@
 # @jasonruesch/react
 
+## 0.3.1
+
+### Patch Changes
+
+- [`b1f7f84`](https://github.com/jasonruesch/design-system/commit/b1f7f847d7d93c94431fe72cbae85d3f980a8bbf) Thanks [@jasonruesch](https://github.com/jasonruesch)! - Update Spinner SVG to use path-based geometry for cleaner rendering
+
 ## 0.3.0
 
 ### Minor Changes
