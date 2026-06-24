@@ -6,3 +6,6 @@ storybook-static/
 .DS_Store
 coverage/
 *.tsbuildinfo
+
+# Claude Code (local, machine-specific)
+.claude/settings.local.json
