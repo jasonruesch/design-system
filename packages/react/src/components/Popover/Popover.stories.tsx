@@ -20,7 +20,7 @@ export const Default: Story = {
       <PopoverTrigger asChild>
         <Button variant="outline">Open popover</Button>
       </PopoverTrigger>
-      <PopoverContent>
+      <PopoverContent aria-label="Dimensions">
         <div className="flex flex-col gap-2">
           <p className="text-sm font-medium">Dimensions</p>
           <p className="text-sm text-fg-muted">
@@ -41,7 +41,7 @@ export const Open: Story = {
       <PopoverTrigger asChild>
         <Button variant="outline">Open popover</Button>
       </PopoverTrigger>
-      <PopoverContent>
+      <PopoverContent aria-label="Example popover">
         <p className="text-sm">This popover is open by default.</p>
       </PopoverContent>
     </Popover>

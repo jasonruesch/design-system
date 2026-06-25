@@ -51,5 +51,7 @@ export const AlertDescription = forwardRef<
   HTMLParagraphElement,
   ComponentPropsWithoutRef<"p">
 >(function AlertDescription({ className, ...props }, ref) {
-  return <p ref={ref} className={cn("opacity-90", className)} {...props} />;
+  // No opacity de-emphasis: dimming the semantic fg color on a tinted variant
+  // background (success/warning) drops it below the 4.5:1 contrast threshold.
+  return <p ref={ref} className={cn(className)} {...props} />;
 });

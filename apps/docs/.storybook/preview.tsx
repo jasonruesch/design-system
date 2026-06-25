@@ -28,7 +28,12 @@ const withTheme: Decorator = (Story, context) => {
 const preview: Preview = {
   parameters: {
     controls: { matchers: { color: /(background|color)$/i, date: /Date$/i } },
-    a11y: { test: "todo" },
+    // Run axe on every story. `test: "error"` fails the Vitest run (pnpm test)
+    // on violations; Chromatic also reports a11y results for accept/deny review.
+    // Tune axe here via `element` (selector to inspect), `config`
+    // (axe.configure options, e.g. disabling a rule), and `options` — see
+    // https://www.chromatic.com/docs/accessibility/configure/.
+    a11y: { test: "error" },
   },
   globalTypes: {
     theme: {

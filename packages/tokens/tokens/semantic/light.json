@@ -10,7 +10,7 @@
     "fg": {
       "default": { "$value": "{color.slate.900}", "$type": "color" },
       "muted": { "$value": "{color.slate.600}", "$type": "color" },
-      "subtle": { "$value": "{color.slate.400}", "$type": "color" },
+      "subtle": { "$value": "{color.slate.500}", "$type": "color" },
       "onEmphasis": { "$value": "{color.white}", "$type": "color" },
       "onAccent": { "$value": "{color.white}", "$type": "color" }
     },
