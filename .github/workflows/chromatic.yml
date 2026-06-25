@@ -48,3 +48,7 @@ jobs:
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
           workingDir: apps/docs
           buildScriptName: build-storybook
+          # The project is linked to GitHub, so Chromatic reports snapshot
+          # results via a separate commit status check; the job can finish as
+          # soon as the build is uploaded instead of waiting for that.
+          exitOnceUploaded: true
