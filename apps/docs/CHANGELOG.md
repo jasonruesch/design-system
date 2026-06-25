@@ -1,5 +1,13 @@
 # @jasonruesch/docs
 
+## 0.0.6
+
+### Patch Changes
+
+- Updated dependencies [[`fc71ca7`](https://github.com/jasonruesch/design-system/commit/fc71ca7d768ad3c1ddf84ac6b06c0d4387f9e1b4)]:
+  - @jasonruesch/tokens@0.1.2
+  - @jasonruesch/react@0.3.2
+
 ## 0.0.5
 
 ### Patch Changes
