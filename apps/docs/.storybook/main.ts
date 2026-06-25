@@ -48,14 +48,14 @@ const config: StorybookConfig = {
   viteFinal: async (cfg, { configType }) => {
     cfg.plugins = cfg.plugins ?? [];
     cfg.plugins.push(tailwindcss());
-    // Serve assets from /<repo>/ for the production GitHub Pages build. Chromatic
-    // serves the published Storybook from its own root domain, so the base path
-    // must be disabled there (its workflow sets STORYBOOK_DISABLE_BASE_PATH) —
-    // otherwise every asset 404s and Chromatic reports "JavaScript failed to load".
-    if (
-      configType === "PRODUCTION" &&
-      !process.env.STORYBOOK_DISABLE_BASE_PATH
-    ) {
+    // Only the GitHub Pages deploy build needs to serve assets from /<repo>/, so
+    // it opts in by setting STORYBOOK_BASE_PATH. Every other production build —
+    // the CI Chromatic run, the local Visual Tests addon, the `chromatic` CLI —
+    // serves from a root domain, where the base path makes every asset 404 and
+    // Chromatic reports "Failed to verify your Storybook" / "JavaScript failed
+    // to load". Opt-in (vs. opt-out) keeps any new Chromatic entry point correct
+    // by default.
+    if (configType === "PRODUCTION" && process.env.STORYBOOK_BASE_PATH) {
       cfg.base = basePath;
     }
     return cfg;

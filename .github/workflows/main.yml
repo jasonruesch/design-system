@@ -98,8 +98,12 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      # Serve assets from the GitHub Pages base path /<repo>/ (see
+      # apps/docs/.storybook/main.ts). Only this deploy build opts in.
       - name: Build Storybook
         run: pnpm build-storybook
+        env:
+          STORYBOOK_BASE_PATH: "true"
 
       - name: Setup Pages
         uses: actions/configure-pages@v6

@@ -42,12 +42,12 @@ jobs:
       - name: Build
         run: pnpm build
 
+      # Chromatic serves Storybook from its own root domain, so it must NOT use
+      # the GitHub Pages base path. That's the default now — only the Pages deploy
+      # opts in via STORYBOOK_BASE_PATH (see apps/docs/.storybook/main.ts) — so no
+      # extra env is needed here.
       - name: Run Chromatic
         uses: chromaui/action@v17
-        # Chromatic serves Storybook from its own root domain, so build without
-        # the GitHub Pages base path (see apps/docs/.storybook/main.ts).
-        env:
-          STORYBOOK_DISABLE_BASE_PATH: "true"
         with:
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
           workingDir: apps/docs
