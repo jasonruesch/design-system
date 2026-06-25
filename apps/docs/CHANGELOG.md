@@ -1,5 +1,12 @@
 # @jasonruesch/docs
 
+## 0.0.7
+
+### Patch Changes
+
+- Updated dependencies [[`4a42049`](https://github.com/jasonruesch/design-system/commit/4a42049f5256d83e11021f5aab5980956c018a61)]:
+  - @jasonruesch/react@0.3.3
+
 ## 0.0.6
 
 ### Patch Changes
