@@ -1,5 +1,11 @@
 # @jasonruesch/react
 
+## 0.3.3
+
+### Patch Changes
+
+- [`4a42049`](https://github.com/jasonruesch/design-system/commit/4a42049f5256d83e11021f5aab5980956c018a61) Thanks [@jasonruesch](https://github.com/jasonruesch)! - Add the `@vitest/coverage-v8` dev dependency so Vitest can initialize when coverage is enabled (e.g. via the VS Code Vitest extension). Vitest 4's default coverage provider is v8, which requires this package.
+
 ## 0.3.2
 
 ### Patch Changes
