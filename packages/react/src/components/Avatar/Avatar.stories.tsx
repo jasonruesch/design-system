@@ -1,5 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { Avatar, AvatarFallback, AvatarImage } from "./Avatar";
+// A fixed avatar from i.pravatar.cc, downloaded so it stays stable across
+// renders and publishes (the live URL returns a random image each request).
+import avatarImage from "./avatar.jpg";
 
 const meta = {
   title: "Feedback/Avatar",
@@ -15,7 +18,7 @@ type Story = StoryObj<typeof meta>;
 export const WithImage: Story = {
   render: () => (
     <Avatar>
-      <AvatarImage src="https://i.pravatar.cc/100" alt="Jane Doe" />
+      <AvatarImage src={avatarImage} alt="Jane Doe" />
       <AvatarFallback>JD</AvatarFallback>
     </Avatar>
   ),
