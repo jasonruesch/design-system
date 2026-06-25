@@ -10,6 +10,13 @@ concurrency:
   group: main-${{ github.ref }}
   cancel-in-progress: false
 
+# Husky git hooks are developer-only quality gates; CI runs the same checks as
+# explicit steps. Disabling them stops the changesets release commit/push from
+# re-triggering the pre-push hook (`pnpm typecheck && pnpm test`) inside the
+# release job, which would otherwise fail (no Playwright browser installed).
+env:
+  HUSKY: "0"
+
 jobs:
   checks:
     name: Format, Lint, Typecheck, Test & Build

@@ -7,6 +7,11 @@ concurrency:
   group: ci-${{ github.ref }}
   cancel-in-progress: true
 
+# CI runs lint/typecheck/test as explicit steps; husky's local git hooks add no
+# value here, so skip installing them.
+env:
+  HUSKY: "0"
+
 jobs:
   check:
     name: Format, Lint, Typecheck, Test & Build

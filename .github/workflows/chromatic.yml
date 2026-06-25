@@ -10,6 +10,10 @@ concurrency:
   group: chromatic-${{ github.ref }}
   cancel-in-progress: true
 
+# CI runs checks as explicit steps; husky's local git hooks add no value here.
+env:
+  HUSKY: "0"
+
 jobs:
   chromatic:
     name: Visual Tests
