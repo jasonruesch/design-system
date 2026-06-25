@@ -31,7 +31,12 @@ const spaRedirect = `
 const config: StorybookConfig = {
   // Stories are co-located with each component in @jasonruesch/react.
   stories: ["../../../packages/react/src/**/*.stories.@(ts|tsx)"],
-  addons: ["@storybook/addon-docs", "@storybook/addon-a11y"],
+  addons: [
+    "@chromatic-com/storybook",
+    "@storybook/addon-docs",
+    "@storybook/addon-a11y",
+    "@storybook/addon-vitest",
+  ],
   framework: {
     name: "@storybook/react-vite",
     options: {},

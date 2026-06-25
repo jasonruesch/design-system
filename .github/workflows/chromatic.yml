@@ -1,0 +1,46 @@
+name: Chromatic
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+concurrency:
+  group: chromatic-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  chromatic:
+    name: Visual Tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+        with:
+          # Chromatic uses git history to find each build's baseline.
+          fetch-depth: 0
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v6
+
+      - name: Setup Node
+        uses: actions/setup-node@v6
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      # Build first so dist artifacts (e.g. @jasonruesch/tokens/css, consumed by
+      # the Tailwind stylesheet) exist before Storybook is built.
+      - name: Build
+        run: pnpm build
+
+      - name: Run Chromatic
+        uses: chromaui/action@v17
+        with:
+          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+          workingDir: apps/docs
+          buildScriptName: build-storybook

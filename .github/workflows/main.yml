@@ -49,6 +49,10 @@ jobs:
       - name: Typecheck
         run: pnpm typecheck
 
+      # The docs Storybook stories run as Vitest browser tests via Playwright.
+      - name: Install Playwright browser
+        run: pnpm --filter @jasonruesch/docs exec playwright install --with-deps chromium
+
       - name: Test
         run: pnpm test
 

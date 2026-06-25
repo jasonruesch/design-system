@@ -4,6 +4,7 @@ packages:
   - "tooling/*"
 minimumReleaseAgeExclude:
   - style-dictionary@5.5.0
+  - chromatic@17.6.0
 allowBuilds:
   "@parcel/watcher": true
   esbuild: true
