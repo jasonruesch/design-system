@@ -1,0 +1,75 @@
+import { Meta, Title, Canvas, Controls } from "@storybook/addon-docs/blocks";
+import * as PopoverStories from "./Popover.stories";
+
+<Meta of={PopoverStories} />
+
+<Title />
+
+Popover displays a floating panel anchored to a trigger element. Its surface
+colors, border, and shadow are all driven by design tokens so it adapts to the
+active theme automatically.
+
+## When to use
+
+- **Use a Popover** for non-modal, contextual content that supplements the
+  current view — inline settings, detail panels, or quick-edit forms.
+- Prefer a **Dialog** when the interaction requires explicit user focus and
+  blocks the rest of the page.
+- Keep popover content short; long or multi-step flows belong in a Dialog or
+  a dedicated page.
+
+## Import
+
+```tsx
+import {
+  Popover,
+  PopoverAnchor,
+  PopoverClose,
+  PopoverContent,
+  PopoverTrigger,
+} from "@jasonruesch/react";
+```
+
+## Usage
+
+Click the trigger to open and close the panel. Use the controls below to
+explore props interactively.
+
+<Canvas of={PopoverStories.Default} />
+
+<Controls of={PopoverStories.Default} />
+
+## Open by default
+
+Set `defaultOpen` on `Popover` to render the panel open on mount — useful for
+onboarding tips or demos where the popover should be immediately visible.
+
+<Canvas of={PopoverStories.Open} />
+
+## Anatomy
+
+`Popover` is a composite component built on the Radix UI Popover primitive.
+Each sub-component maps to a distinct layer of the pattern:
+
+- **`Popover`** — stateful root that controls open/close; wraps all other parts.
+- **`PopoverTrigger`** — the element that toggles the panel. Use `asChild` to
+  forward behavior onto your own button or link.
+- **`PopoverAnchor`** — optional explicit anchor point when the trigger and
+  anchor need to be different elements.
+- **`PopoverContent`** — the floating panel itself. Rendered in a portal so it
+  escapes overflow clipping. Defaults to `align="center"` and `sideOffset={8}`.
+- **`PopoverClose`** — a control inside the panel that closes it. Use `asChild`
+  to apply to an existing button.
+
+## Accessibility
+
+- Built on `@radix-ui/react-popover`, which manages ARIA roles, `aria-expanded`,
+  and `aria-controls` automatically between the trigger and the panel.
+- The panel receives focus when opened; pressing `Escape` closes it and returns
+  focus to the trigger.
+- Supply an `aria-label` on `PopoverContent` when the panel has no visible
+  heading, so screen readers announce its purpose.
+- The trigger renders as a `<button>` by default — keyboard activation (`Enter`
+  / `Space`) and focus order work without extra configuration.
+- A visible focus ring is applied via the shared focus utility; do not suppress
+  it.

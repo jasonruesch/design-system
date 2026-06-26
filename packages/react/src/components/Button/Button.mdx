@@ -1,0 +1,84 @@
+import { Meta, Title, Canvas, Controls } from "@storybook/addon-docs/blocks";
+import * as ButtonStories from "./Button.stories";
+
+<Meta of={ButtonStories} />
+
+<Title />
+
+Buttons trigger an action — submitting a form, opening a dialog, or advancing a
+flow. Variants and sizes are driven entirely by design tokens, so they adapt to
+the active theme and brand automatically.
+
+## When to use
+
+- **Use a Button** for actions that change state or move the user forward
+  (Save, Continue, Delete).
+- **Use a [Link](?path=/docs/navigation-link--docs)** instead for navigation to
+  another page or view — it should look and behave like an anchor.
+- Reach for the **`primary`** variant for the single most important action in a
+  view, and lean on `secondary`, `outline`, or `ghost` for supporting actions.
+
+## Import
+
+```tsx
+import { Button } from "@jasonruesch/react";
+```
+
+## Usage
+
+The default `primary` button. Use the controls below to explore every prop
+interactively.
+
+<Canvas of={ButtonStories.Primary} />
+
+<Controls of={ButtonStories.Primary} />
+
+## Variants
+
+Five token-driven variants cover the common emphasis levels. Pick the lowest
+emphasis that still reads clearly — multiple `primary` buttons competing in one
+view dilutes the call to action.
+
+<Canvas of={ButtonStories.AllVariants} />
+
+Use **`danger`** for destructive actions such as deleting or removing data.
+
+<Canvas of={ButtonStories.Danger} />
+
+## Sizes
+
+Three sizes map to the spacing scale. Default to `md`; use `sm` in dense layouts
+like toolbars and `lg` for prominent, standalone calls to action.
+
+<Canvas of={ButtonStories.Sizes} />
+
+## Loading state
+
+Set `loading` to show a spinner and disable interaction while an async action is
+in flight. The button keeps its label so its width stays stable, and it sets
+`aria-busy` for assistive technology.
+
+<Canvas of={ButtonStories.Loading} />
+
+## Composition
+
+Use `asChild` to render the button's styles on a different element — most often
+an anchor — while keeping a single source of truth for the visuals. The child
+element receives all of the button's classes and props.
+
+```tsx
+<Button asChild>
+  <a href="/dashboard">Go to dashboard</a>
+</Button>
+```
+
+## Accessibility
+
+- Renders a native `<button>` by default, so keyboard activation (`Enter` /
+  `Space`) and focus order work out of the box.
+- A visible focus ring is applied via the shared focus utility — don't remove
+  it.
+- `loading` and `disabled` both block interaction; `loading` additionally
+  exposes `aria-busy="true"` so screen readers announce the pending state.
+- When using `asChild` with a non-button element, make sure the element is still
+  reachable and operable by keyboard (e.g. an `<a href>`).

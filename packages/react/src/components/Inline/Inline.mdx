@@ -1,0 +1,56 @@
+import { Meta, Title, Canvas, Controls } from "@storybook/addon-docs/blocks";
+import * as InlineStories from "./Inline.stories";
+
+<Meta of={InlineStories} />
+
+<Title />
+
+Inline arranges its children in a horizontal row using flexbox. Gap, alignment,
+and justification are all driven by design tokens, so spacing adapts to the
+active theme automatically.
+
+## When to use
+
+- **Use Inline** when you need a single horizontal strip of items with
+  consistent token-based spacing (icon + label, a row of badges, a toolbar).
+- **Reach for a grid** when items need to align across multiple rows in two
+  dimensions.
+- Enable `wrap` when items may overflow the container width and should reflow
+  rather than clip.
+
+## Import
+
+```tsx
+import { Inline } from "@jasonruesch/react";
+```
+
+## Usage
+
+The default Inline with `gap={2}` and `align="center"`. Use the controls below
+to explore every prop interactively.
+
+<Canvas of={InlineStories.Default} />
+
+<Controls of={InlineStories.Default} />
+
+## Wrapping
+
+Set `wrap` when the number of items is dynamic or the container is narrow.
+Items reflow to the next line instead of overflowing.
+
+<Canvas of={InlineStories.Wrapping} />
+
+## Space between
+
+Use `justify="between"` to push items to the edges of the container — useful
+for header rows with a title on the left and actions on the right.
+
+<Canvas of={InlineStories.SpaceBetween} />
+
+## Accessibility
+
+- Renders a plain `<div>` by default — no implicit ARIA role.
+- Use the `as` prop to swap in a semantically appropriate element (e.g.
+  `as="nav"` for a navigation row, `as="ul"` + `<li>` children for a list).
+- Inline itself adds no focus management; ensure interactive children are
+  individually focusable and keyboard-operable.

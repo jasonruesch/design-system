@@ -1,0 +1,62 @@
+import { Meta, Title, Canvas, Controls } from "@storybook/addon-docs/blocks";
+import * as SwitchStories from "./Switch.stories";
+
+<Meta of={SwitchStories} />
+
+<Title />
+
+Switch is an accessible on/off toggle built on the Radix Switch primitive.
+Its track and thumb colors are driven entirely by design tokens, so they
+adapt to the active theme automatically.
+
+## When to use
+
+- **Use a Switch** for a single binary setting that takes effect immediately
+  — airplane mode, dark theme, notifications on/off.
+- **Use a Checkbox** instead when the value only applies after the user
+  submits a form, or when you need a three-state (indeterminate) control.
+- Always pair the Switch with a visible `<Label>` so the purpose of the
+  toggle is unambiguous.
+
+## Import
+
+```tsx
+import { Switch } from "@jasonruesch/react";
+```
+
+## Usage
+
+The default unchecked state. Use the controls below to explore every prop
+interactively.
+
+<Canvas of={SwitchStories.Default} />
+
+<Controls of={SwitchStories.Default} />
+
+## Checked
+
+Pass `defaultChecked` for an uncontrolled toggle that starts on, or `checked`
+plus an `onCheckedChange` handler to control the value from outside.
+
+<Canvas of={SwitchStories.Checked} />
+
+## Disabled
+
+Set `disabled` when the setting is locked in the current context. The thumb
+and track render at reduced opacity and the cursor changes to `not-allowed`.
+
+<Canvas of={SwitchStories.Disabled} />
+
+## Accessibility
+
+- Renders a native `<button role="switch">` via Radix, so `Enter` and
+  `Space` toggle the value and the element participates in the normal tab
+  order.
+- `aria-checked` is updated automatically by Radix as the state changes —
+  screen readers announce the current on/off value without extra wiring.
+- A visible focus ring is applied via the shared focus utility — don't
+  remove it.
+- `disabled` sets `aria-disabled` on the underlying button and drops it from
+  the tab order, preventing both keyboard and pointer interaction.
+- Always connect a `<Label>` via matching `id` / `htmlFor` attributes so the
+  control has an accessible name.

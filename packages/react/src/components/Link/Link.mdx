@@ -1,0 +1,73 @@
+import { Meta, Title, Canvas, Controls } from "@storybook/addon-docs/blocks";
+import * as LinkStories from "./Link.stories";
+
+<Meta of={LinkStories} />
+
+<Title />
+
+A styled anchor element for inline navigation. Variants are driven by design
+tokens so the link adapts to the active theme and brand automatically.
+
+## When to use
+
+- **Use a Link** for navigating to another page, view, or section — it should
+  render and behave like an anchor.
+- **Use a Button** instead for actions that change state or trigger an operation
+  (Save, Delete, Submit a form).
+- Choose **`default`** when the link must stand out clearly against surrounding
+  text; use **`subtle`** for secondary references; use **`quiet`** when the
+  underline would visually clutter a dense list or nav bar.
+
+## Import
+
+```tsx
+import { Link } from "@jasonruesch/react";
+```
+
+## Usage
+
+The default link. Use the controls below to explore every prop interactively.
+
+<Canvas of={LinkStories.Default} />
+
+<Controls of={LinkStories.Default} />
+
+## Variants
+
+Three token-driven variants cover common emphasis levels. Use the lowest
+emphasis that still reads clearly in context.
+
+<Canvas of={LinkStories.AllVariants} />
+
+- **`default`** — accent-colored text with an underline on hover. Best for
+  prominent inline links.
+- **`subtle`** — muted text that brightens on hover. Use for supporting
+  references that shouldn't compete with the main content.
+- **`quiet`** — same color as body text, underline on hover only. Use when the
+  link destination is evident from context and the underline would add noise.
+
+## Composition with `asChild`
+
+Set `asChild` to delegate rendering to a child element — typically a
+router-aware link such as React Router's `Link` — while keeping the
+design-system styling. Only a single child element is allowed.
+
+<Canvas of={LinkStories.AsChild} />
+
+```tsx
+<Link asChild variant="default">
+  <RouterLink to="/about">About</RouterLink>
+</Link>
+```
+
+## Accessibility
+
+- Renders a native `<a>` by default, so keyboard activation and focus order
+  work out of the box.
+- A visible focus ring is applied via the shared focus utility — don't remove
+  it.
+- When using `asChild` with a non-anchor child, ensure the element is reachable
+  by keyboard and has a meaningful `href` or equivalent (e.g. `to` for React
+  Router).
+- Avoid using a `<button>` as the `asChild` child — it conflates navigation and
+  action semantics. Use the `Button` component for actions instead.

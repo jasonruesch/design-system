@@ -66,7 +66,6 @@ const preview: Preview = {
     brand: "default",
   },
   decorators: [withTheme],
-  tags: ["autodocs"],
 };
 
 export default preview;

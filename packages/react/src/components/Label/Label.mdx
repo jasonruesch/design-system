@@ -1,0 +1,63 @@
+import { Meta, Title, Canvas, Controls } from "@storybook/addon-docs/blocks";
+import * as LabelStories from "./Label.stories";
+
+<Meta of={LabelStories} />
+
+<Title />
+
+Label is an accessible form label built on Radix UI's Label primitive. Typography
+and color are driven entirely by design tokens, so it adapts to the active theme
+and brand automatically.
+
+## When to use
+
+- **Use Label** to associate descriptive text with any form control — `<input>`,
+  `<select>`, `<textarea>`, or a custom component.
+- Prefer Label over a plain `<label>` so you get the built-in peer-disabled styles
+  and the optional required indicator for free.
+- Do **not** use Label as decorative text; every Label should be linked to a
+  control via `htmlFor` or by wrapping the control as a child.
+
+## Import
+
+```tsx
+import { Label } from "@jasonruesch/react";
+```
+
+## Usage
+
+The default Label. Use the controls below to explore every prop interactively.
+
+<Canvas of={LabelStories.Default} />
+
+<Controls of={LabelStories.Default} />
+
+## Required
+
+Set `required` to render an asterisk (`*`) after the label text. The asterisk is
+marked `aria-hidden` so screen readers do not read it — rely on form validation
+messages, not the visual indicator, to communicate the requirement in full.
+
+<Canvas of={LabelStories.Required} />
+
+## With an input
+
+Pair Label with an input by passing a matching `htmlFor` / `id`. The built-in
+`peer-disabled` styles automatically dim the label when the associated control is
+disabled.
+
+<Canvas of={LabelStories.WithInput} />
+
+## Accessibility
+
+- Renders a native `<label>` via Radix UI's Label primitive, so the browser
+  natively associates it with its control when `htmlFor` matches the control's
+  `id`.
+- The required asterisk (`*`) uses `aria-hidden="true"` — screen readers will not
+  announce it. Communicate required state through error messages or
+  `aria-required` on the control instead.
+- When the associated control is disabled, `peer-disabled` Tailwind utilities
+  apply `cursor-not-allowed` and `opacity-70` to the label automatically — no
+  extra markup needed.
+- A visible focus ring is not applied to the label itself; focus management is
+  handled by the associated form control.

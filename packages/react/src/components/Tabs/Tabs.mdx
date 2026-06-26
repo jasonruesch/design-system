@@ -1,0 +1,60 @@
+import { Meta, Title, Canvas, Controls } from "@storybook/addon-docs/blocks";
+import * as TabsStories from "./Tabs.stories";
+
+<Meta of={TabsStories} />
+
+<Title />
+
+Tabs organize related content into switchable panels within a single view. Active
+indicator color and border styles are driven by design tokens, so they adapt to
+the active theme and brand automatically.
+
+## When to use
+
+- **Use Tabs** when you have two or more distinct content areas that benefit from
+  being compared or switched between without leaving the page (settings sections,
+  account vs. password, etc.).
+- **Avoid Tabs** for sequential steps — reach for a stepper instead.
+- Limit the number of tabs to what comfortably fits at the widest breakpoint; if
+  labels start wrapping or truncating, consider a different navigation pattern.
+
+## Import
+
+```tsx
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@jasonruesch/react";
+```
+
+## Usage
+
+The default Tabs group with three panels. Switch between tabs to see the active
+indicator and content swap.
+
+<Canvas of={TabsStories.Default} />
+
+<Controls of={TabsStories.Default} />
+
+## Anatomy
+
+Tabs is a composite component built on the Radix UI Tabs primitive. Each
+sub-component has a distinct role:
+
+- **`Tabs`** — the root that manages active-tab state. Use `defaultValue` for
+  an uncontrolled group or `value` + `onValueChange` for controlled usage.
+- **`TabsList`** — the container for all trigger buttons, rendered as a
+  horizontal strip with a bottom border.
+- **`TabsTrigger`** — a clickable tab button. Each trigger must have a `value`
+  that matches the corresponding `TabsContent`.
+- **`TabsContent`** — the panel revealed when its `value` matches the active
+  tab. Hidden panels are removed from the accessibility tree automatically.
+
+## Accessibility
+
+- Built on the Radix UI `@radix-ui/react-tabs` primitive, which implements the
+  [ARIA Tabs pattern](https://www.w3.org/WAI/ARIA/apg/patterns/tabs/) with
+  `role="tablist"`, `role="tab"`, and `role="tabpanel"` applied automatically.
+- Keyboard navigation: `←` / `→` arrow keys move focus between triggers;
+  `Enter` / `Space` activate the focused tab.
+- A visible focus ring is applied to both `TabsTrigger` and `TabsContent` via
+  the shared focus utility — don't remove it.
+- Inactive panels are hidden via `hidden` so they are not reachable by keyboard
+  or read by screen readers when not active.

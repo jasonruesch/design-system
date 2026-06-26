@@ -1,0 +1,86 @@
+import { Meta, Title, Canvas, Controls } from "@storybook/addon-docs/blocks";
+import * as AlertStories from "./Alert.stories";
+
+<Meta of={AlertStories} />
+
+<Title />
+
+Alert displays a contextual message banner — informational, confirmatory, or
+cautionary. Colors, borders, and foreground text are driven entirely by design
+tokens, so they adapt to the active theme automatically.
+
+## When to use
+
+- **Use an Alert** for static, inline feedback that does not require user action
+  (page-level notices, form submission results, system status).
+- **Prefer `info`** for neutral guidance; use `success`, `warning`, or `danger`
+  only when the semantic meaning genuinely matches — overusing `danger` trains
+  users to ignore it.
+- Reach for a toast or dialog instead when the message is transient or demands
+  an explicit user response.
+
+## Import
+
+```tsx
+import { Alert, AlertTitle, AlertDescription } from "@jasonruesch/react";
+```
+
+## Usage
+
+The default `info` variant. Use the controls below to explore the `variant`
+prop interactively.
+
+<Canvas of={AlertStories.Info} />
+
+<Controls of={AlertStories.Info} />
+
+## Variants
+
+### Info
+
+Use for neutral guidance or supplementary context where no action is required.
+
+<Canvas of={AlertStories.Info} />
+
+### Success
+
+Confirm that an action completed as expected.
+
+<Canvas of={AlertStories.Success} />
+
+### Warning
+
+Signal a condition that may cause problems if ignored. This variant renders
+`role="alert"` so assistive technology announces the message immediately.
+
+<Canvas of={AlertStories.Warning} />
+
+### Danger
+
+Report an error or a destructive outcome. Also renders `role="alert"` for
+immediate screen-reader announcement.
+
+<Canvas of={AlertStories.Danger} />
+
+## Anatomy
+
+Alert is a composite component made up of three sub-components:
+
+| Sub-component | Element | Role |
+|---|---|---|
+| `Alert` | `<div>` | Outer container; applies the variant styles and the appropriate ARIA live role |
+| `AlertTitle` | `<p>` | Bold heading that names the message category |
+| `AlertDescription` | `<p>` | Supporting body text with full contrast against the tinted background |
+
+## Accessibility
+
+- `danger` and `warning` variants render `role="alert"` (assertive live
+  region), so screen readers announce the content immediately without the user
+  having to focus the element.
+- `info` and `success` variants render `role="status"` (polite live region),
+  which waits for the user to finish their current task before announcing.
+- `AlertDescription` intentionally avoids opacity de-emphasis — dimming the
+  semantic foreground color on a tinted variant background would drop contrast
+  below the 4.5:1 WCAG AA threshold.
+- Alert is not interactive; do not place it inside a button or link, and do not
+  add `tabIndex` to the container element.

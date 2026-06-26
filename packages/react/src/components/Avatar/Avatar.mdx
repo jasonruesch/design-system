@@ -1,0 +1,61 @@
+import { Meta, Title, Canvas, Controls } from "@storybook/addon-docs/blocks";
+import * as AvatarStories from "./Avatar.stories";
+
+<Meta of={AvatarStories} />
+
+<Title />
+
+Avatar displays a user or entity image with a graceful text fallback. Size and
+color are driven by design tokens, so the component adapts to the active theme
+automatically.
+
+## When to use
+
+- **Use Avatar** to represent a specific person or entity — in navigation, user
+  profiles, comment threads, and list items.
+- Keep the fallback text to two characters (initials) so it fits cleanly at
+  every size.
+- Avoid using Avatar as a generic icon or illustration; reach for an icon
+  component instead.
+
+## Import
+
+```tsx
+import { Avatar, AvatarImage, AvatarFallback } from "@jasonruesch/react";
+```
+
+## Usage
+
+An avatar with an image and a text fallback. The fallback is always present in
+the markup — it shows automatically if the image fails to load or is still
+loading.
+
+<Canvas of={AvatarStories.WithImage} />
+
+## Fallback
+
+When no valid image is available, `AvatarFallback` is shown instead. Supply
+initials or a short label that still identifies the person at a glance.
+
+<Canvas of={AvatarStories.FallbackOnly} />
+
+## Anatomy
+
+`Avatar` is a composite component built from three sub-components:
+
+| Sub-component    | Role                                                               |
+| ---------------- | ------------------------------------------------------------------ |
+| `Avatar`         | Root container — a circular, clipping `<span>` with size variant. |
+| `AvatarImage`    | The `<img>` element; hides itself automatically if loading fails.  |
+| `AvatarFallback` | Shown while the image loads or when it is unavailable.             |
+
+## Accessibility
+
+- Built on Radix UI `@radix-ui/react-avatar`, which handles the image/fallback
+  swap without flicker.
+- `AvatarImage` renders a native `<img>`, so always supply a meaningful `alt`
+  description — the user's name is a good default.
+- `AvatarFallback` is purely presentational; screen readers will read the `alt`
+  text from `AvatarImage`, so the fallback text does not need to duplicate it.
+- A visible focus ring is applied when the surrounding context is interactive
+  (e.g. when Avatar is wrapped in a link or button).

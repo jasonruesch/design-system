@@ -1,0 +1,55 @@
+import { Meta, Title, Canvas, Controls } from "@storybook/addon-docs/blocks";
+import * as ContainerStories from "./Container.stories";
+
+<Meta of={ContainerStories} />
+
+<Title />
+
+Container centers page content horizontally and caps its width at a token-driven
+breakpoint — keeping line lengths readable and layouts consistent across viewports.
+
+## When to use
+
+- **Use a Container** to wrap top-level page sections or full-page layouts that
+  need a centered, max-width column with consistent horizontal padding.
+- **Reach for `size="full"`** when you want the padding but no max-width cap —
+  for example, a full-bleed banner that still aligns to the page gutter.
+- Avoid nesting Containers; a single Container per layout level is enough.
+
+## Import
+
+```tsx
+import { Container } from "@jasonruesch/react";
+```
+
+## Usage
+
+The default `lg` container. Use the controls below to explore every prop
+interactively.
+
+<Canvas of={ContainerStories.Default} />
+
+<Controls of={ContainerStories.Default} />
+
+## Small
+
+`size="sm"` caps width at the `screen-sm` breakpoint — useful for narrow forms,
+login panels, or focused reading views where a wide column would hurt legibility.
+
+<Canvas of={ContainerStories.Small} />
+
+## Full width
+
+`size="full"` removes the max-width cap while keeping the horizontal padding,
+letting content span the entire viewport — suitable for hero sections, data
+tables, or any full-bleed layout that still needs gutters.
+
+<Canvas of={ContainerStories.FullWidth} />
+
+## Accessibility
+
+- Renders a plain `<div>` by default; use the `as` prop to swap in a semantic
+  element (e.g. `as="main"`, `as="section"`, or `as="article"`) so the landmark
+  or sectioning role is communicated to assistive technology.
+- Container adds no ARIA attributes of its own — any required roles come from the
+  element type chosen via `as`.

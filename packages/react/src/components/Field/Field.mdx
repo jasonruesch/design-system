@@ -1,0 +1,64 @@
+import { Meta, Title, Canvas, Controls } from "@storybook/addon-docs/blocks";
+import * as FieldStories from "./Field.stories";
+
+<Meta of={FieldStories} />
+
+<Title />
+
+Field is a form-control wrapper that renders a label, description, and error
+message, and automatically wires up the accessibility attributes (`id`,
+`aria-describedby`, `aria-invalid`, `required`) for the control it contains.
+
+## When to use
+
+- **Use Field** whenever you need a labeled form control — text inputs, selects,
+  checkboxes, or any custom control that participates in a form.
+- **Omit Field** only for controls that handle their own label wiring internally
+  and already expose the full ARIA contract.
+- Place a single focusable control as `children`; the label's `htmlFor` is
+  automatically pointed at that control's generated `id`.
+
+## Import
+
+```tsx
+import { Field } from "@jasonruesch/react";
+```
+
+## Usage
+
+A Field with a label and a helper description. Use the controls below to explore
+every prop interactively.
+
+<Canvas of={FieldStories.Default} />
+
+<Controls of={FieldStories.Default} />
+
+## Required
+
+Set `required` to mark a field as mandatory. The Label visually indicates the
+requirement and the control receives the native `required` attribute
+automatically.
+
+<Canvas of={FieldStories.Required} />
+
+## Error state
+
+Pass an `error` string to display an inline error message. The message renders
+in danger-token color, has `role="alert"` so screen readers announce it
+immediately, and sets `aria-invalid` on the control via context.
+
+<Canvas of={FieldStories.WithError} />
+
+## Accessibility
+
+- Renders a native `<div>` wrapper; the label is a native `<label>` with
+  `htmlFor` pointing at the control's `id` (auto-generated via `useId` if none
+  is supplied).
+- Description and error paragraphs are given stable `id`s and joined as the
+  control's `aria-describedby` — both are read by screen readers when the
+  control receives focus.
+- Error messages carry `role="alert"` so assistive technology announces them
+  without the user having to navigate to them.
+- `aria-invalid` is forwarded to the control when an `error` is present.
+- Controls that call `useField` or `useFieldControl` from this package inherit
+  all wiring automatically — no manual prop threading required.

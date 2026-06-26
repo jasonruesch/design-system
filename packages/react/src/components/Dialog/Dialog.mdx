@@ -1,0 +1,81 @@
+import { Meta, Title, Canvas, Controls } from "@storybook/addon-docs/blocks";
+import * as DialogStories from "./Dialog.stories";
+
+<Meta of={DialogStories} />
+
+<Title />
+
+Dialog presents content in a modal overlay that interrupts the user's flow and
+requires a deliberate response. Surfaces, overlays, and animations are driven by
+design tokens, so they adapt to the active theme automatically.
+
+## When to use
+
+- **Use a Dialog** for actions that need confirmation before proceeding (deleting
+  data, confirming a subscription) or for focused tasks that shouldn't navigate
+  away.
+- **Avoid overusing it** — interrupting the user has a cost. Prefer inline
+  validation, toasts, or popovers for feedback that doesn't require a decision.
+- For non-blocking supplemental content, consider a sheet or popover instead.
+
+## Import
+
+```tsx
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@jasonruesch/react";
+```
+
+## Usage
+
+A trigger button opens the dialog; the overlay and content animate in. Use the
+controls below to explore props interactively.
+
+<Canvas of={DialogStories.Default} />
+
+<Controls of={DialogStories.Default} />
+
+## Open by default
+
+Use `defaultOpen` to render the dialog pre-opened — useful for onboarding flows
+or when the page should immediately draw attention to a critical message.
+
+<Canvas of={DialogStories.Open} />
+
+## Anatomy
+
+Dialog is a composite component built on the Radix UI Dialog primitive. Each
+sub-component has a distinct role:
+
+| Sub-component        | Role                                                                          |
+| -------------------- | ----------------------------------------------------------------------------- |
+| `Dialog`             | Root state provider (wraps everything).                                       |
+| `DialogTrigger`      | Element that opens the dialog; use `asChild` to forward to a custom element.  |
+| `DialogContent`      | Modal surface — renders into a portal with an overlay, focus trap, and close button. |
+| `DialogHeader`       | Vertical stack for the title and description.                                 |
+| `DialogTitle`        | Semantic heading rendered via Radix's `Title`; required for accessibility.    |
+| `DialogDescription`  | Supporting copy rendered via Radix's `Description`; required for accessibility. |
+| `DialogFooter`       | Action row — stacks vertically on mobile, right-aligns horizontally on `sm+`. |
+| `DialogClose`        | Element that closes the dialog; use `asChild` to forward to a Button.        |
+
+## Accessibility
+
+- Built on the **Radix UI Dialog** primitive, which implements the
+  [ARIA Dialog (Modal) pattern](https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/).
+- Radix manages the **focus trap** (focus stays inside while open), **scroll
+  lock**, and restores focus to the trigger on close.
+- Press `Esc` to close — handled automatically by Radix.
+- `DialogTitle` and `DialogDescription` are required: Radix wires them to
+  `aria-labelledby` and `aria-describedby` on the dialog surface so screen
+  readers announce context when the dialog opens.
+- The built-in close button carries `aria-label="Close"` and the × icon is
+  `aria-hidden` so it is not double-announced.
+- A visible focus ring is applied to the close button via the shared focus
+  utility — don't remove it.

@@ -1,0 +1,78 @@
+import { Meta, Title, Canvas, Controls } from "@storybook/addon-docs/blocks";
+import * as TextStories from "./Text.stories";
+
+<Meta of={TextStories} />
+
+<Title />
+
+Body text with token-driven size, weight, and tone. All variants adapt to the
+active theme automatically — no hardcoded colours or scales.
+
+## When to use
+
+- **Use Text** for body copy, labels, captions, and inline prose that is not a
+  heading.
+- **Use a heading element** (e.g. an `<h1>`–`<h6>` via the `as` prop, or a
+  dedicated Heading component) for page and section titles.
+- Prefer the **`muted`** or **`subtle`** tone for supporting or secondary
+  information, and **`danger`** or **`success`** for status feedback.
+
+## Import
+
+```tsx
+import { Text } from "@jasonruesch/react";
+```
+
+## Usage
+
+The default `Text` renders a `<p>` at `md` size with `normal` weight and the
+`default` tone. Use the controls below to explore every prop interactively.
+
+<Canvas of={TextStories.Default} />
+
+<Controls of={TextStories.Default} />
+
+## Tones
+
+Use **`muted`** for secondary content such as meta information or helper text.
+The `subtle`, `accent`, `danger`, and `success` tones are available for status
+copy and emphasis — apply them purposefully rather than decoratively.
+
+<Canvas of={TextStories.Muted} />
+
+## Sizes
+
+Five sizes map to the type scale. Default to `md`; use `xs` or `sm` in dense
+contexts like table cells, and `lg` or `xl` for prominent introductory copy.
+
+<Canvas of={TextStories.Sizes} />
+
+## Weights
+
+Four weights let you create visual hierarchy within body text without changing
+the element. Prefer `normal` for prose and `medium` or `semibold` for labels
+and UI copy that needs to stand out.
+
+<Canvas of={TextStories.Weights} />
+
+## Polymorphic rendering
+
+Pass `as` to render a different HTML element while keeping the same visual
+styles. This is useful when the semantic element must be a `<span>`, `<label>`,
+or `<li>` without a separate style definition.
+
+```tsx
+<Text as="span" size="sm" tone="muted">
+  Last updated 3 minutes ago
+</Text>
+```
+
+## Accessibility
+
+- Renders a native `<p>` by default, giving it implicit paragraph semantics.
+- Use the `as` prop to switch to a semantically appropriate element —
+  `<span>` for inline text, `<label>` for form labels, and so on.
+- Tone changes are purely visual; if colour alone conveys meaning (e.g.
+  `danger`), pair it with a visible text label or an `aria-label`.
+- `truncate` clips overflowing text with an ellipsis — add a `title` attribute
+  or tooltip so the full content remains accessible.

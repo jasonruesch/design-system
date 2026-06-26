@@ -1,0 +1,51 @@
+import { Meta, Title, Canvas, Controls } from "@storybook/addon-docs/blocks";
+import * as GridStories from "./Grid.stories";
+
+<Meta of={GridStories} />
+
+<Title />
+
+A CSS grid layout primitive with token-based column count and gap sizing. Column
+count and spacing are driven by design tokens, so layouts adapt consistently
+across the active theme.
+
+## When to use
+
+- **Use Grid** when you need a multi-column layout with consistent gutters —
+  card grids, form field rows, image galleries.
+- **Use Flexbox utilities** instead when items need to wrap freely or align
+  along a single axis without fixed column counts.
+- Prefer lower column counts (`2`–`4`) for content grids; use `12` only when
+  you need fine-grained column spanning control.
+
+## Import
+
+```tsx
+import { Grid } from "@jasonruesch/react";
+```
+
+## Usage
+
+The default Grid uses 2 columns and a `gap-4` gutter. Use the controls below to
+explore `cols` and `gap` interactively.
+
+<Canvas of={GridStories.Default} />
+
+<Controls of={GridStories.Default} />
+
+## Three columns
+
+A 3-column layout with a tighter `gap-2` gutter — useful for compact card grids
+or dashboards where space is at a premium.
+
+<Canvas of={GridStories.ThreeColumns} />
+
+## Accessibility
+
+- Renders a native `<div>` by default; pass `as` to swap the element (e.g.
+  `as="ul"`) when the grid content is semantically a list.
+- Grid itself carries no landmark role — wrap it in the appropriate semantic
+  container (`<main>`, `<section>`, etc.) so screen readers understand its
+  context.
+- Child elements are responsible for their own focus order; Grid does not alter
+  the DOM order, so reading order follows source order automatically.

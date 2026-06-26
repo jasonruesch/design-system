@@ -1,0 +1,71 @@
+import { Meta, Title, Canvas, Controls } from "@storybook/addon-docs/blocks";
+import * as TextareaStories from "./Textarea.stories";
+
+<Meta of={TextareaStories} />
+
+<Title />
+
+Textarea is a multi-line text input for free-form content. Its colors, border,
+and focus ring are driven by design tokens, so it adapts to the active theme
+automatically.
+
+## When to use
+
+- **Use Textarea** when the expected input spans multiple lines — bios,
+  descriptions, comments, or notes.
+- **Use an `<input type="text">`** (or the `Input` component) for single-line
+  values such as names, email addresses, or search queries.
+- Wrap Textarea in a **`Field`** to attach a visible label, help text, or
+  validation error — standalone use is appropriate only when a label is provided
+  by other means.
+
+## Import
+
+```tsx
+import { Textarea } from "@jasonruesch/react";
+```
+
+## Usage
+
+The default Textarea. Use the controls below to explore every prop
+interactively.
+
+<Canvas of={TextareaStories.Default} />
+
+<Controls of={TextareaStories.Default} />
+
+## Disabled
+
+Set `disabled` to block editing and indicate that the field is unavailable.
+The cursor changes to `not-allowed` and the control is dimmed to 50 % opacity.
+
+<Canvas of={TextareaStories.Disabled} />
+
+## With Field
+
+Wrap Textarea in `Field` to wire up an accessible label and optional
+description. `Field` forwards `id`, `aria-describedby`, and related attributes
+to Textarea automatically via `useFieldControl`.
+
+<Canvas of={TextareaStories.InField} />
+
+## Validation error
+
+When `Field` receives an `error` prop it marks Textarea as `aria-invalid`,
+which shifts the border and focus ring to the danger color so the error state
+is immediately visible without relying on color alone.
+
+<Canvas of={TextareaStories.InvalidInField} />
+
+## Accessibility
+
+- Renders a native `<textarea>`, so all standard keyboard behavior — tab focus,
+  cursor movement, select-all — works without additional configuration.
+- A visible focus ring is applied via the shared focus utility — don't remove it.
+- When used inside `Field`, the `id` and `aria-describedby` attributes are
+  injected automatically so the label and description are announced by screen
+  readers.
+- `aria-invalid` is set by `Field` when an error is present; the danger-colored
+  border and ring reinforce the state visually.
+- `disabled` prevents interaction and is communicated natively to assistive
+  technology.

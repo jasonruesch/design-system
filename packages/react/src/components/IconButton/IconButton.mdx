@@ -1,0 +1,80 @@
+import { Meta, Title, Canvas, Controls } from "@storybook/addon-docs/blocks";
+import * as IconButtonStories from "./IconButton.stories";
+
+<Meta of={IconButtonStories} />
+
+<Title />
+
+IconButton is a square, icon-only button for triggering actions without visible
+text. Variants and sizes are driven entirely by design tokens, so they adapt to
+the active theme and brand automatically.
+
+## When to use
+
+- **Use an IconButton** for compact, self-evident actions — add, close, expand —
+  where a text label would clutter the UI.
+- **Always provide an `aria-label`** that describes the action. It is required
+  by the component and is the only accessible name screen readers will announce.
+- **Use a regular Button** when the action is not universally understood from the
+  icon alone, or when space allows for a text label.
+
+## Import
+
+```tsx
+import { IconButton } from "@jasonruesch/react";
+```
+
+## Usage
+
+The default `ghost` IconButton. Use the controls below to explore every prop
+interactively.
+
+<Canvas of={IconButtonStories.Default} />
+
+<Controls of={IconButtonStories.Default} />
+
+## Variants
+
+Four token-driven variants match the same emphasis levels as Button. Default to
+`ghost` for toolbar and in-context actions; use `primary` only for the single
+most prominent action in a view.
+
+<Canvas of={IconButtonStories.AllVariants} />
+
+Use **`danger`** for destructive icon actions such as delete or remove.
+
+## Sizes
+
+Three sizes map to the spacing scale (`sm` = 32 px, `md` = 40 px, `lg` =
+48 px). Default to `md`; use `sm` in dense toolbars and `lg` for standalone
+prominent actions.
+
+<Canvas of={IconButtonStories.Sizes} />
+
+## Composition
+
+Use `asChild` to apply the IconButton's styles to a different element — for
+example, to wrap a router `<Link>` while keeping a single source of truth for
+the visuals.
+
+```tsx
+<IconButton aria-label="Go to dashboard" asChild>
+  <a href="/dashboard">
+    <HomeIcon />
+  </a>
+</IconButton>
+```
+
+## Accessibility
+
+- Renders a native `<button>` by default, so keyboard activation (`Enter` /
+  `Space`) and focus order work out of the box.
+- `aria-label` is required — without it the button has no accessible name.
+  Pass a concise action description, not just the icon name (e.g. "Add item",
+  not "Plus icon").
+- A visible focus ring is applied via the shared focus utility — don't remove
+  it.
+- `disabled` blocks pointer and keyboard interaction and reduces opacity to
+  signal the inactive state visually.
+- When using `asChild` with a non-button element, make sure the element is still
+  reachable and operable by keyboard (e.g. an `<a href>`).

@@ -1,0 +1,53 @@
+import { Meta, Title, Canvas, Controls } from "@storybook/addon-docs/blocks";
+import * as SpinnerStories from "./Spinner.stories";
+
+<Meta of={SpinnerStories} />
+
+<Title />
+
+An indeterminate loading indicator used to signal that an operation is in
+progress. Size is driven by design tokens so the spinner adapts to the active
+theme and brand automatically.
+
+## When to use
+
+- **Use a Spinner** when an operation has an unknown duration — fetching data,
+  submitting a form, or lazy-loading content.
+- Prefer a progress bar or skeleton screen when the completion percentage is
+  known or the layout shift would be jarring.
+- Place it inline next to the triggering element (e.g. inside a loading button)
+  or centered in the region it represents.
+
+## Import
+
+```tsx
+import { Spinner } from "@jasonruesch/react";
+```
+
+## Usage
+
+The default `md` spinner. Use the controls below to explore every prop
+interactively.
+
+<Canvas of={SpinnerStories.Default} />
+
+<Controls of={SpinnerStories.Default} />
+
+## Sizes
+
+Three sizes map to the spacing scale. Default to `md`; use `sm` in tight
+contexts such as inline text or toolbars, and `lg` for full-page or
+section-level loading states.
+
+<Canvas of={SpinnerStories.Sizes} />
+
+## Accessibility
+
+- Renders a `<span>` with `role="status"` and `aria-live="polite"` so assistive
+  technology announces the loading state without interrupting the user.
+- The SVG is marked `aria-hidden="true"` — it is purely decorative.
+- A visually hidden `<span className="sr-only">` carries the accessible label
+  (default: `"Loading"`). Pass a custom `label` prop to describe the specific
+  operation, e.g. `label="Saving changes"`.
+- Do not suppress the label — screen readers rely on it to communicate that
+  something is happening.

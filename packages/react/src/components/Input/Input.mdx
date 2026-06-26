@@ -1,0 +1,77 @@
+import { Meta, Title, Canvas, Controls } from "@storybook/addon-docs/blocks";
+import * as InputStories from "./Input.stories";
+
+<Meta of={InputStories} />
+
+<Title />
+
+A single-line text input that inherits accessibility wiring from a parent Field.
+Size, border, and color are driven entirely by design tokens, so the input adapts
+to the active theme automatically.
+
+## When to use
+
+- **Use Input** for short, freeform text — names, email addresses, search queries,
+  and similar one-line values.
+- **Wrap Input in a Field** whenever you need a visible label, description, or
+  error message — Field handles the `id`/`aria-describedby` wiring automatically.
+- Reach for a `<textarea>` for multi-line content; Input is not suited for long
+  prose.
+
+## Import
+
+```tsx
+import { Input } from "@jasonruesch/react";
+```
+
+## Usage
+
+The default `md` input with a placeholder. Use the controls below to explore
+every prop interactively.
+
+<Canvas of={InputStories.Default} />
+
+<Controls of={InputStories.Default} />
+
+## Sizes
+
+Three sizes map to the spacing scale. Default to `md`; use `sm` in dense layouts
+like toolbars and `lg` for prominent, standalone fields.
+
+<Canvas of={InputStories.Sizes} />
+
+## Disabled state
+
+Set `disabled` to prevent interaction and signal that the field is unavailable.
+The input renders at reduced opacity with a `not-allowed` cursor.
+
+<Canvas of={InputStories.Disabled} />
+
+## Inside a Field
+
+Nest Input inside a `Field` to get a linked label and description for free. Field
+injects the correct `id`, `aria-describedby`, and `aria-invalid` so you don't
+wire them manually.
+
+<Canvas of={InputStories.InField} />
+
+## Validation
+
+When Field receives an `error` prop it marks the input `aria-invalid`, which
+triggers the danger-toned border and ring. Display the error message in the Field
+— not separately — so assistive technology associates it with the control.
+
+<Canvas of={InputStories.InvalidInField} />
+
+## Accessibility
+
+- Renders a native `<input>` element so keyboard focus, tab order, and browser
+  autofill work out of the box.
+- A visible focus ring is applied via the shared focus utility — don't remove it.
+- When used inside a `Field`, `aria-describedby` is set automatically to link the
+  description and error message to the input.
+- `aria-invalid` is set by the parent `Field` on error; the input responds with a
+  danger-colored border and focus ring so the invalid state is visible without
+  relying on color alone.
+- `disabled` prevents interaction and is announced by screen readers; prefer
+  `disabled` over `readOnly` when the value should not be submitted.
