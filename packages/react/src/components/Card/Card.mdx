@@ -1,0 +1,68 @@
+import { Meta, Title, Canvas, Controls } from "@storybook/addon-docs/blocks";
+import * as CardStories from "./Card.stories";
+
+<Meta of={CardStories} />
+
+<Title />
+
+Card is a surface container that groups related content into a distinct,
+scannable unit. Its border, background, and shadow are driven entirely by design
+tokens, so they adapt to the active theme automatically.
+
+## When to use
+
+- **Use a Card** to visually separate a self-contained piece of content — a
+  summary, a settings panel, a preview — from the surrounding layout.
+- Avoid nesting cards inside cards; prefer whitespace or dividers to separate
+  content within a single card.
+- Don't use a Card as a clickable button — wrap it in an anchor or attach an
+  explicit interactive control instead.
+
+## Import
+
+```tsx
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@jasonruesch/react";
+```
+
+## Usage
+
+A full card composed of all sub-components. Use the controls below to explore
+the available props interactively.
+
+<Canvas of={CardStories.Default} />
+
+<Controls of={CardStories.Default} />
+
+## Anatomy
+
+Card is a composite component. Each sub-component maps to a distinct slot and
+can be included or omitted as needed.
+
+| Sub-component      | Element | Role                                                                   |
+| ------------------ | ------- | ---------------------------------------------------------------------- |
+| `Card`             | `div`   | Outer surface container — applies border, background, and shadow.      |
+| `CardHeader`       | `div`   | Top region — stacks its children in a column with consistent padding.  |
+| `CardTitle`        | `h3`    | Primary label for the card's content.                                  |
+| `CardDescription`  | `p`     | Supporting text rendered in a muted, smaller size below the title.     |
+| `CardContent`      | `div`   | Main body area — shares horizontal padding with the header, no top padding. |
+| `CardFooter`       | `div`   | Bottom region — lays out its children in a row with consistent spacing. |
+
+## Accessibility
+
+- All sub-components render plain HTML elements (`div`, `h3`, `p`), so no ARIA
+  roles are added automatically — the semantic structure comes from using the
+  correct sub-components in order.
+- `CardTitle` renders an `<h3>` by default, placing the card in the document
+  outline. Adjust the heading level via `asChild` or a custom className when the
+  surrounding document structure demands it.
+- Interactive cards (e.g. an anchor wrapper) must be reachable by keyboard; add
+  a visible focus ring and ensure the entire clickable area is operable.
+- Avoid placing multiple focusable elements inside a card when the card itself
+  is also interactive — it creates ambiguous tab stops for keyboard users.

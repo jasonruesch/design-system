@@ -1,0 +1,58 @@
+import { Meta, Title, Canvas, Controls } from "@storybook/addon-docs/blocks";
+import * as RadioGroupStories from "./RadioGroup.stories";
+
+<Meta of={RadioGroupStories} />
+
+<Title />
+
+RadioGroup presents a set of mutually-exclusive options — only one item can be
+selected at a time. Built on the Radix UI Radio Group primitive, it inherits
+full keyboard navigation and ARIA semantics automatically.
+
+## When to use
+
+- **Use RadioGroup** when the user must pick exactly one option from a short,
+  visible list (two to six items).
+- Prefer a **Select / Combobox** when the list is long or needs filtering.
+- Avoid RadioGroup for binary yes/no choices where a single checkbox or toggle
+  conveys intent more clearly.
+
+## Import
+
+```tsx
+import { RadioGroup, RadioGroupItem } from "@jasonruesch/react";
+```
+
+## Usage
+
+The default RadioGroup with three spacing options. Pair each `RadioGroupItem`
+with a `Label` using matching `id` / `htmlFor` values.
+
+<Canvas of={RadioGroupStories.Default} />
+
+<Controls of={RadioGroupStories.Default} />
+
+## Disabled state
+
+Set `disabled` on the `RadioGroup` root to prevent interaction with every item
+at once. Individual items can also be disabled by passing `disabled` directly
+on a `RadioGroupItem`.
+
+<Canvas of={RadioGroupStories.Disabled} />
+
+## Anatomy
+
+RadioGroup is a composite component made up of two exported pieces:
+
+| Sub-component   | Role                                                                |
+| --------------- | ------------------------------------------------------------------- |
+| `RadioGroup`    | Root container; manages selection state and group-level `disabled`. |
+| `RadioGroupItem` | A single radio button; renders the circle indicator and handles focus. |
+
+## Accessibility
+
+- Built on `@radix-ui/react-radio-group`, which renders a native `role="radiogroup"` container and individual `role="radio"` buttons.
+- Arrow keys (`↑` / `↓` or `←` / `→`) move focus and selection between items; `Tab` moves to and from the group.
+- Each `RadioGroupItem` must have an accessible label — use the `Label` component with a matching `htmlFor` / `id` pair.
+- A visible focus ring is applied via the shared focus utility — don't remove it.
+- Disabled items receive `aria-disabled` and `cursor-not-allowed` styling; they are skipped during keyboard navigation.

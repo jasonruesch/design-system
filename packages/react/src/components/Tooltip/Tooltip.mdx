@@ -1,0 +1,74 @@
+import { Meta, Title, Canvas, Controls } from "@storybook/addon-docs/blocks";
+import * as TooltipStories from "./Tooltip.stories";
+
+<Meta of={TooltipStories} />
+
+<Title />
+
+Tooltips display a short label near an interactive element on hover or focus.
+The floating panel is theme-driven — background, text, and shadow use design
+tokens so the look adapts automatically to light and dark modes.
+
+## When to use
+
+- **Use a Tooltip** to surface a brief label for icon-only controls or to add
+  extra context without cluttering the UI (e.g. a toolbar button's action name).
+- **Avoid Tooltips** for essential information — content inside a tooltip is
+  invisible until hovered or focused and will never reach keyboard-only or
+  touch-only users who do not trigger the element.
+- Keep the label short (a few words); for longer explanations prefer a popover
+  or inline helper text.
+
+## Import
+
+```tsx
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@jasonruesch/react";
+```
+
+## Usage
+
+Wrap the trigger and content inside a `<Tooltip>`, and place a single
+`<TooltipProvider>` at the top of your app (or subtree) to share tooltip
+timing. Use `asChild` on `<TooltipTrigger>` to forward styles onto your own
+element.
+
+<Canvas of={TooltipStories.Default} />
+
+## Open by default
+
+Pass `defaultOpen` to `<Tooltip>` to show the tooltip on first render — useful
+in demos or onboarding flows where you want to draw attention to an affordance
+immediately.
+
+<Canvas of={TooltipStories.Open} />
+
+## Anatomy
+
+The component is composed of four exports that you assemble together:
+
+| Sub-component | Role |
+| --- | --- |
+| `TooltipProvider` | Shared context for delay timing; render once above all tooltips in the tree. |
+| `Tooltip` | Root state container (`Radix Tooltip.Root`). Accepts `open`, `defaultOpen`, `onOpenChange`, and `delayDuration`. |
+| `TooltipTrigger` | The element that activates the tooltip. Supports `asChild` to merge props onto a custom child. |
+| `TooltipContent` | The floating label. Renders via a portal; accepts `side`, `align`, and `sideOffset` (default `6`). |
+
+## Accessibility
+
+- Built on `@radix-ui/react-tooltip`, which implements the
+  [WAI-ARIA Tooltip pattern](https://www.w3.org/WAI/ARIA/apg/patterns/tooltip/).
+- The content panel receives `role="tooltip"` and is linked to the trigger via
+  `aria-describedby` automatically by the Radix primitive.
+- Keyboard users open the tooltip by focusing the trigger element; `Escape`
+  dismisses it without moving focus.
+- Ensure every `<TooltipTrigger>` wraps a natively focusable element (a
+  `<button>`, `<a>`, or an element with `tabIndex`) so keyboard and
+  screen-reader users can reach it.
+- The content fades and scales in/out using `data-[state]` animations — these
+  are driven by CSS and respect `prefers-reduced-motion` when your base styles
+  honour it.

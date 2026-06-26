@@ -1,0 +1,73 @@
+import { Meta, Title, Canvas, Controls } from "@storybook/addon-docs/blocks";
+import * as AccordionStories from "./Accordion.stories";
+
+<Meta of={AccordionStories} />
+
+<Title />
+
+Accordion lets users show and hide sections of related content. Built on the
+Radix UI Accordion primitive, its borders and typography are driven entirely by
+design tokens, so it adapts to the active theme automatically.
+
+## When to use
+
+- **Use an Accordion** when you need to progressively disclose sections of
+  content and vertical space is at a premium — FAQs, settings panels, or
+  multi-step instructions.
+- **Avoid an Accordion** when users need to compare sections side by side, or
+  when all content is short enough to show at once — visible content is easier
+  to scan.
+
+## Import
+
+```tsx
+import {
+  Accordion,
+  AccordionItem,
+  AccordionTrigger,
+  AccordionContent,
+} from "@jasonruesch/react";
+```
+
+## Usage
+
+The default `"single"` + `collapsible` configuration: only one panel is open at
+a time, and clicking an open trigger collapses it. Use the controls below to
+explore props interactively.
+
+<Canvas of={AccordionStories.Default} />
+
+<Controls of={AccordionStories.Default} />
+
+## Multiple open panels
+
+Set `type="multiple"` to allow any number of sections to be open at the same
+time. Use `defaultValue` with an array to pre-expand specific items on first
+render.
+
+<Canvas of={AccordionStories.Multiple} />
+
+## Anatomy
+
+The Accordion is a composite component made up of four sub-components:
+
+| Sub-component      | Role                                                                              |
+| ------------------ | --------------------------------------------------------------------------------- |
+| `Accordion`        | Root container. Accepts `type="single"` or `type="multiple"`.                    |
+| `AccordionItem`    | Wraps a single section; renders a bottom border from the `border-line` token.     |
+| `AccordionTrigger` | Clickable header button. Rotates the chevron icon when its panel is open.         |
+| `AccordionContent` | Collapsible panel. Animates open/closed via `animate-accordion-down/up` utilities.|
+
+## Accessibility
+
+- Built on Radix UI's `@radix-ui/react-accordion`, which implements the
+  [WAI-ARIA Accordion pattern](https://www.w3.org/WAI/ARIA/apg/patterns/accordion/).
+- Each trigger renders inside an `<h3>` (`AccordionPrimitive.Header`) and is a
+  native `<button>`, so keyboard activation (`Enter` / `Space`) and focus order
+  work out of the box.
+- The expand/collapse chevron carries `aria-hidden="true"` — it is decorative
+  and not announced by screen readers.
+- A visible focus ring is applied to the trigger via the shared `focusRing`
+  utility — don't remove it.
+- Radix manages `aria-expanded` and `aria-controls` on the trigger and
+  `aria-labelledby` on the panel automatically.

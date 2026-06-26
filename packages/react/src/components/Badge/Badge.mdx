@@ -1,0 +1,68 @@
+import { Meta, Title, Canvas, Controls } from "@storybook/addon-docs/blocks";
+import * as BadgeStories from "./Badge.stories";
+
+<Meta of={BadgeStories} />
+
+<Title />
+
+Badges are compact labels for status, category, or count. Variant colors are
+driven entirely by design tokens, so they adapt to the active theme and brand
+automatically.
+
+## When to use
+
+- **Use a Badge** to convey status (Success, Warning, Danger) or tag content
+  with a category or count at a glance.
+- Keep the label short — one to three words. For longer contextual messages,
+  reach for an Alert or inline text instead.
+- Avoid using badges as interactive controls; they are display-only.
+
+## Import
+
+```tsx
+import { Badge } from "@jasonruesch/react";
+```
+
+## Usage
+
+The default `neutral` badge. Use the controls below to explore every prop
+interactively.
+
+<Canvas of={BadgeStories.Neutral} />
+
+<Controls of={BadgeStories.Neutral} />
+
+## Variants
+
+Six token-driven variants cover the common semantic levels. Choose the variant
+that matches the intent of the label — don't reach for `accent` or `danger`
+just for visual interest.
+
+<Canvas of={BadgeStories.AllVariants} />
+
+Use **`success`** to indicate a positive or completed state.
+
+<Canvas of={BadgeStories.Success} />
+
+Use **`warning`** for conditions that need attention but aren't critical.
+
+<Canvas of={BadgeStories.Warning} />
+
+Use **`danger`** for errors, failures, or destructive states.
+
+<Canvas of={BadgeStories.Danger} />
+
+Use **`outline`** when you need a badge that blends with the surface and carries
+no semantic color weight.
+
+<Canvas of={BadgeStories.Outline} />
+
+## Accessibility
+
+- Renders a native `<span>`, so it carries no implicit ARIA role. If the badge
+  conveys meaningful status, pair it with a visually hidden label or add
+  `aria-label` on the surrounding element to describe the context.
+- Badge text is always visible — do not rely on color alone to communicate
+  meaning. Pair the color variant with a word or icon.
+- Because `<span>` is not focusable, badges require no keyboard interaction
+  handling.

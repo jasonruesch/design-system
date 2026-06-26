@@ -1,0 +1,59 @@
+import { Meta, Title, Canvas, Controls } from "@storybook/addon-docs/blocks";
+import * as SeparatorStories from "./Separator.stories";
+
+<Meta of={SeparatorStories} />
+
+<Title />
+
+A visual or semantic divider that separates sections of content. Appearance is
+driven by the `bg-line` design token, so it adapts to the active theme
+automatically.
+
+## When to use
+
+- **Use a Separator** to visually divide unrelated or loosely related content
+  blocks — for example, between menu items, list sections, or sidebar groups.
+- Leave `decorative` as `true` (the default) when the line is purely visual and
+  carries no structural meaning for assistive technology.
+- Set `decorative={false}` when the separator represents a genuine content
+  boundary that screen readers should announce.
+
+## Import
+
+```tsx
+import { Separator } from "@jasonruesch/react";
+```
+
+## Usage
+
+The default horizontal separator. Use the controls below to explore props
+interactively.
+
+<Canvas of={SeparatorStories.Horizontal} />
+
+<Controls of={SeparatorStories.Horizontal} />
+
+## Horizontal
+
+A full-width 1 px rule (`h-px w-full`) styled with the `bg-line` token. Add
+spacing via `className` (e.g. `my-4`) rather than wrapping it in a container.
+
+<Canvas of={SeparatorStories.Horizontal} />
+
+## Vertical
+
+Set `orientation="vertical"` for inline layouts such as nav bars or button
+groups. The separator becomes `h-full w-px` and requires the parent to
+establish an explicit height.
+
+<Canvas of={SeparatorStories.Vertical} />
+
+## Accessibility
+
+- Built on the Radix UI `Separator` primitive, which renders a `<div>` with
+  `role="separator"` and `aria-orientation` when `decorative={false}`.
+- When `decorative={true}` (the default), `role` and `aria-orientation` are
+  omitted so screen readers skip the element entirely — use this for purely
+  visual dividers.
+- The component carries no interactive behaviour; no keyboard interaction is
+  needed.

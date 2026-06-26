@@ -1,0 +1,62 @@
+import { Meta, Title, Canvas, Controls } from "@storybook/addon-docs/blocks";
+import * as HeadingStories from "./Heading.stories";
+
+<Meta of={HeadingStories} />
+
+<Title />
+
+Section heading that renders the correct semantic tag (`h1`–`h6`) from a single
+`level` prop. Visual size and color are driven entirely by design tokens, so the
+heading adapts to the active theme automatically.
+
+## When to use
+
+- **Use Heading** for section titles and content hierarchy — page titles, card
+  headers, section labels.
+- Prefer setting `level` to match the document outline; use the `as` prop only
+  when the visual size and the semantic level need to differ.
+- Do not skip heading levels in the DOM — even if a smaller visual size is
+  desired, adjust via `as` rather than choosing a non-sequential `level`.
+
+## Import
+
+```tsx
+import { Heading } from "@jasonruesch/react";
+```
+
+## Usage
+
+The default heading renders at level 2. Use the controls below to explore every
+prop interactively.
+
+<Canvas of={HeadingStories.Default} />
+
+<Controls of={HeadingStories.Default} />
+
+## Level 1
+
+Use `level={1}` for the top-level page title. There should be at most one `h1`
+per page.
+
+<Canvas of={HeadingStories.Level1} />
+
+## All levels
+
+Each level maps to a distinct token-driven size, from `text-4xl` at level 1 down
+to `text-md` at level 6. Choose the level that reflects the content hierarchy,
+not the visual size you want.
+
+<Canvas of={HeadingStories.AllLevels} />
+
+## Accessibility
+
+- Renders a native `<h1>`–`<h6>` element, so heading semantics and document
+  outline are correct by default.
+- The `level` prop controls both the rendered tag and the visual size. Use `as`
+  to override the tag without changing the visual size (e.g. `as="h2"` with
+  `level={4}` for a visually smaller section header that still participates in
+  the correct outline level).
+- Heading text uses `text-balance` for improved line wrapping — no extra work
+  needed.
+- The component is fully compatible with assistive technology landmark and
+  heading navigation (e.g. screen-reader heading browse mode).

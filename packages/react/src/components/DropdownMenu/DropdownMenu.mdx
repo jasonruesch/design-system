@@ -1,0 +1,79 @@
+import { Meta, Title, Canvas, Controls } from "@storybook/addon-docs/blocks";
+import * as DropdownMenuStories from "./DropdownMenu.stories";
+
+<Meta of={DropdownMenuStories} />
+
+<Title />
+
+DropdownMenu surfaces a list of actions or toggleable options anchored to a
+trigger element. Built on Radix UI, it is fully keyboard-navigable and
+styled entirely with design tokens so it adapts to the active theme automatically.
+
+## When to use
+
+- **Use a DropdownMenu** when a button would spawn more than one or two related
+  actions (account options, view settings, bulk operations).
+- **Prefer inline controls** (checkboxes, toggles) when the options are always
+  visible and don't need to be hidden away.
+- Keep the menu short — if the list grows beyond seven or eight items, consider
+  a different pattern such as a command palette or a dedicated settings page.
+
+## Import
+
+```tsx
+import {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuPortal,
+  DropdownMenuItem,
+  DropdownMenuCheckboxItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+} from "@jasonruesch/react";
+```
+
+## Usage
+
+A labeled group of actions opened from a trigger button. Open the menu to
+explore its layout.
+
+<Canvas of={DropdownMenuStories.Default} />
+
+## Checkbox items
+
+Use `DropdownMenuCheckboxItem` for toggleable settings inside the menu. Checked
+state is managed externally via `checked` / `onCheckedChange` — the item renders
+a checkmark indicator automatically when checked.
+
+<Canvas of={DropdownMenuStories.WithCheckboxItems} />
+
+## Anatomy
+
+| Sub-component | Role |
+|---|---|
+| `DropdownMenu` | Root provider; manages open/closed state. |
+| `DropdownMenuTrigger` | The element that opens the menu. Use `asChild` to forward to your own button. |
+| `DropdownMenuPortal` | Renders the menu in a portal to avoid overflow/z-index issues (used internally by `DropdownMenuContent`). |
+| `DropdownMenuContent` | The floating menu surface; wraps its own portal and applies enter/exit animations. |
+| `DropdownMenuGroup` | Logical grouping of items — does not add a visible separator on its own. |
+| `DropdownMenuItem` | A single selectable action. Pass `inset` to align with checked/icon peers. Disabled items receive `data-[disabled]` styling. |
+| `DropdownMenuCheckboxItem` | An item with a leading checkbox indicator; manages its own check icon. |
+| `DropdownMenuLabel` | A non-interactive section heading rendered in a muted, smaller typeface. |
+| `DropdownMenuSeparator` | A thin horizontal rule between groups. |
+
+## Accessibility
+
+- Built on Radix UI's `DropdownMenu` primitive, which implements the
+  [ARIA Menu Button pattern](https://www.w3.org/WAI/ARIA/apg/patterns/menu-button/).
+- The trigger receives `aria-expanded` and `aria-haspopup="menu"` automatically.
+- **Keyboard interaction:** `Enter` / `Space` opens the menu; `ArrowDown` /
+  `ArrowUp` moves between items; `Enter` or `Space` activates an item; `Escape`
+  closes the menu and returns focus to the trigger.
+- Disabled items have `pointer-events: none` and reduced opacity — they are
+  skipped during keyboard navigation.
+- `DropdownMenuContent` renders in a portal so it is never clipped by
+  `overflow: hidden` ancestors, and its z-index keeps it above page content.
+- Don't remove the default focus ring; item focus is indicated via the
+  `data-[highlighted]` background token (`bg-muted`).

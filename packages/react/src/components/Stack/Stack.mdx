@@ -1,0 +1,59 @@
+import { Meta, Title, Canvas, Controls } from "@storybook/addon-docs/blocks";
+import * as StackStories from "./Stack.stories";
+
+<Meta of={StackStories} />
+
+<Title />
+
+Stack arranges its children in a vertical column using flexbox. Spacing,
+alignment, and justification are all driven by design tokens, so the layout
+adapts to the active theme and spacing scale automatically.
+
+## When to use
+
+- **Use Stack** when you need to space a list of items vertically — form fields,
+  card sections, stacked buttons, or content blocks.
+- Reach for a different layout primitive (e.g. a horizontal flex or a grid) when
+  your items need to flow in more than one dimension.
+- Prefer `gap` over manually adding margins to child elements — it keeps spacing
+  consistent and easy to change in one place.
+
+## Import
+
+```tsx
+import { Stack } from "@jasonruesch/react";
+```
+
+## Usage
+
+The default Stack renders a vertical column with a `gap` of `4`. Use the
+controls below to explore every prop interactively.
+
+<Canvas of={StackStories.Default} />
+
+<Controls of={StackStories.Default} />
+
+## Gap
+
+Increase `gap` for sections that need more breathing room. Token values map
+directly to the spacing scale — prefer larger values at the page-section level
+and smaller values inside dense components.
+
+<Canvas of={StackStories.LargeGap} />
+
+## Alignment
+
+Set `align` to control cross-axis (horizontal) alignment of children. The
+default is `stretch`, which fills the available width. Use `center` when items
+have intrinsic widths and should be centered within the Stack.
+
+<Canvas of={StackStories.Centered} />
+
+## Accessibility
+
+- Renders a plain `<div>` by default — no implicit ARIA role.
+- Use the `as` prop to swap the underlying element when semantics matter (e.g.
+  `as="ul"` with `<li>` children for a list, `as="section"` for a landmark
+  region).
+- Stack applies no focus or keyboard behavior of its own; focus order follows
+  DOM order, which matches the visual stacking order.

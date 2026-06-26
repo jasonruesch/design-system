@@ -1,0 +1,80 @@
+import { Meta, Title, Canvas, Controls } from "@storybook/addon-docs/blocks";
+import * as SelectStories from "./Select.stories";
+
+<Meta of={SelectStories} />
+
+<Title />
+
+Select lets users choose one option from a dropdown list. The trigger, panel,
+and items are styled with design tokens, so they adapt to the active theme and
+brand automatically.
+
+## When to use
+
+- **Use Select** when a user must pick exactly one value from a predefined list
+  (e.g. country, category, sort order).
+- Prefer a group of radio buttons when there are five or fewer options and
+  seeing all choices at a glance helps the decision.
+- Use `SelectGroup` + `SelectLabel` to organize long lists into labeled
+  sections; add `SelectSeparator` between groups for visual clarity.
+
+## Import
+
+```tsx
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectSeparator,
+  SelectTrigger,
+  SelectValue,
+} from "@jasonruesch/react";
+```
+
+## Usage
+
+The default select with a flat list of options. Use the controls below to
+explore props interactively.
+
+<Canvas of={SelectStories.Default} />
+
+<Controls of={SelectStories.Default} />
+
+## Grouped options
+
+Use `SelectGroup` with `SelectLabel` to organize related items under a heading,
+and `SelectSeparator` to draw a visual divider between groups.
+
+<Canvas of={SelectStories.Grouped} />
+
+## Anatomy
+
+| Sub-component      | Role                                                                    |
+| ------------------ | ----------------------------------------------------------------------- |
+| `Select`           | Root context provider (re-exports `@radix-ui/react-select` Root).       |
+| `SelectTrigger`    | Button that opens the listbox; shows a chevron icon and the placeholder. |
+| `SelectValue`      | Renders the selected value or placeholder text inside the trigger.      |
+| `SelectContent`    | Floating listbox panel; rendered in a portal, animated on open/close.   |
+| `SelectGroup`      | Groups related items together (re-exports Radix Group).                 |
+| `SelectLabel`      | Non-interactive heading for a group.                                    |
+| `SelectItem`       | A selectable option; shows a check mark when selected.                  |
+| `SelectSeparator`  | Horizontal divider between groups.                                      |
+
+## Accessibility
+
+- Built on `@radix-ui/react-select`, which implements the
+  [ARIA Listbox pattern](https://www.w3.org/WAI/ARIA/apg/patterns/listbox/).
+- The trigger renders as a `<button>` with `role="combobox"`; the listbox panel
+  receives `role="listbox"` and each option `role="option"`.
+- Pass `aria-label` on `SelectTrigger` when there is no visible `<label>`
+  associated with the control (see the story examples).
+- `aria-invalid` on the trigger applies a danger-colored border — wire this up
+  when integrating with form validation.
+- Keyboard interactions are handled by Radix: `Enter` / `Space` opens the
+  listbox, arrow keys move focus between options, `Escape` closes the panel, and
+  `Tab` moves focus out of the trigger.
+- A shared focus ring is applied to the trigger — do not remove it.
+- The chevron and check mark icons are marked `aria-hidden="true"` so they are
+  not announced by screen readers.

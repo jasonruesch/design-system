@@ -1,0 +1,61 @@
+import { Meta, Title, Canvas, Controls } from "@storybook/addon-docs/blocks";
+import * as CheckboxStories from "./Checkbox.stories";
+
+<Meta of={CheckboxStories} />
+
+<Title />
+
+Checkbox lets users toggle a single boolean option — checked, unchecked, or
+indeterminate. Checked and indeterminate states are driven by design tokens so
+they adapt to the active theme automatically.
+
+## When to use
+
+- **Use a Checkbox** for binary on/off choices that take effect immediately or
+  are committed on form submit (e.g. "Accept terms", "Subscribe to newsletter").
+- **Use a radio group** instead when the user must choose exactly one option
+  from a set of mutually exclusive values.
+- Always pair a Checkbox with a visible `Label` — never leave it unlabelled.
+
+## Import
+
+```tsx
+import { Checkbox } from "@jasonruesch/react";
+```
+
+## Usage
+
+The default unchecked checkbox. Pair it with a `Label` using matching `id` /
+`htmlFor` values so the label click activates the control.
+
+<Canvas of={CheckboxStories.Default} />
+
+<Controls of={CheckboxStories.Default} />
+
+## Checked
+
+Pass `defaultChecked` for an uncontrolled checkbox that starts checked, or bind
+`checked` + `onCheckedChange` for controlled usage.
+
+<Canvas of={CheckboxStories.Checked} />
+
+## Disabled
+
+Set `disabled` to prevent interaction. The control and its paired label both
+render at reduced opacity to signal the unavailable state visually.
+
+<Canvas of={CheckboxStories.Disabled} />
+
+## Accessibility
+
+- Built on **Radix UI Checkbox** (`@radix-ui/react-checkbox`), which renders a
+  `<button role="checkbox">` so keyboard activation (`Space`) and focus order
+  work out of the box.
+- A visible focus ring is applied via the shared focus utility — don't remove
+  it.
+- The check icon carries `aria-hidden="true"` because the role and state
+  (`aria-checked`) are already communicated through the Radix primitive.
+- Always associate a visible `<Label>` via `htmlFor` / `id` so screen readers
+  announce what the checkbox controls.
+- `disabled` sets the native disabled attribute, which prevents interaction and
+  removes the element from the tab order.

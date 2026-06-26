@@ -62,6 +62,7 @@
   "devDependencies": {
     "@jasonruesch/eslint-config": "workspace:*",
     "@jasonruesch/tsconfig": "workspace:*",
+    "@storybook/addon-docs": "^10.4.6",
     "@storybook/react-vite": "^10.4.6",
     "@tailwindcss/cli": "^4.3.1",
     "@testing-library/jest-dom": "^6.6.3",

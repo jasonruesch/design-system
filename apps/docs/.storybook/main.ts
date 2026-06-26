@@ -1,5 +1,6 @@
 import type { StorybookConfig } from "@storybook/react-vite";
 import tailwindcss from "@tailwindcss/vite";
+import remarkGfm from "remark-gfm";
 
 // GitHub Pages serves this project site under /<repo>/.
 const basePath = "/design-system/";
@@ -29,11 +30,24 @@ const spaRedirect = `
 `;
 
 const config: StorybookConfig = {
-  // Stories are co-located with each component in @jasonruesch/react.
-  stories: ["../../../packages/react/src/**/*.stories.@(ts|tsx)"],
+  // Stories and their MDX docs are co-located with each component in
+  // @jasonruesch/react.
+  stories: [
+    "../../../packages/react/src/**/*.mdx",
+    "../../../packages/react/src/**/*.stories.@(ts|tsx)",
+  ],
   addons: [
     "@chromatic-com/storybook",
-    "@storybook/addon-docs",
+    {
+      name: "@storybook/addon-docs",
+      // remark-gfm enables GitHub-flavored markdown in MDX — notably pipe
+      // tables, which the docs pages use for component anatomy.
+      options: {
+        mdxPluginOptions: {
+          mdxCompileOptions: { remarkPlugins: [remarkGfm] },
+        },
+      },
+    },
     "@storybook/addon-a11y",
     "@storybook/addon-vitest",
   ],

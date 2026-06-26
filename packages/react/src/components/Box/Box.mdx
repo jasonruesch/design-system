@@ -1,0 +1,51 @@
+import { Meta, Title, Canvas, Controls } from "@storybook/addon-docs/blocks";
+import * as BoxStories from "./Box.stories";
+
+<Meta of={BoxStories} />
+
+<Title />
+
+Box is the lowest-level layout primitive — a styleable element with automatic
+class merging. Every other layout component in the design system composes Box,
+so it adapts to any theme through Tailwind utility classes and design tokens.
+
+## When to use
+
+- **Use Box** when you need a generic container with class merging but no
+  additional layout logic (padding, background, border radius).
+- **Reach for a higher-level layout component** (Stack, Grid, etc.) when you
+  need structural layout behaviour — Box is intentionally unopinionated.
+- **Use the `as` prop** to emit the correct semantic HTML element (`section`,
+  `main`, `ul`, …) instead of wrapping Box in another element.
+
+## Import
+
+```tsx
+import { Box } from "@jasonruesch/react";
+```
+
+## Usage
+
+The default Box renders a `<div>`. Use the controls below to explore every prop
+interactively.
+
+<Canvas of={BoxStories.Default} />
+
+<Controls of={BoxStories.Default} />
+
+## Polymorphic element
+
+Pass any valid HTML element tag to `as` to change the rendered element while
+keeping the same class-merging behaviour. Use this to output semantically
+correct markup without extra DOM wrappers.
+
+<Canvas of={BoxStories.AsSection} />
+
+## Accessibility
+
+- Renders a native `<div>` by default — carries no implicit ARIA role.
+- Use the `as` prop to emit the appropriate semantic element (`section`, `main`,
+  `article`, etc.) so assistive technology receives the correct landmark or
+  structural role without additional `role` attributes.
+- Box does not manage focus or keyboard interaction; those responsibilities
+  belong to the components that compose it.
