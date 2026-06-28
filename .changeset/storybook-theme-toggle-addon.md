@@ -1,5 +1,5 @@
 ---
-"@jasonruesch/docs": patch
+"@jasonruesch/react": patch
 ---
 
 Replace the Storybook theme toggles with a custom toolbar addon to eliminate the flash on toggle.
