@@ -4,128 +4,99 @@ import {
   DocsContainer,
   type DocsContainerProps,
 } from "@storybook/addon-docs/blocks";
-import { GLOBALS_UPDATED } from "storybook/internal/core-events";
+import { addons } from "storybook/preview-api";
 
 import { themeFor } from "./theme";
+import {
+  BRAND_EVENT,
+  REQUEST_EVENT,
+  THEME_EVENT,
+  applyThemeAttrs,
+  readBrandChoice,
+  readThemeChoice,
+  resolveTheme,
+  type BrandChoice,
+  type ResolvedTheme,
+  type ThemeChoice,
+} from "./theme-addon";
 
 // Source Tailwind entry — @tailwindcss/vite compiles it (incl. token CSS vars)
 // and rebuilds utilities live as stories change.
 import "../../../packages/react/src/styles/tailwind.css";
 
-// The three theme choices shared by the App (chrome) and Content (canvas)
-// toolbars. "system" follows the OS prefers-color-scheme.
-const THEME_ITEMS = [
-  { value: "system", title: "System", icon: "circlehollow" },
-  { value: "light", title: "Light", icon: "sun" },
-  { value: "dark", title: "Dark", icon: "moon" },
-] as const;
+// Theme/Brand are driven by the custom toolbar addon (manager.tsx), not by
+// Storybook globals — so toggling no longer re-renders the story or reloads the
+// docs page (which was the flash). The manager broadcasts the choice; here we
+// keep the iframe's <html> attributes and the docs container in sync with it.
+const channel = addons.getChannel();
 
-// Resolve a theme choice to a concrete "light" | "dark", tracking live OS
-// changes while the choice is "system".
-const useResolvedTheme = (choice: string): "light" | "dark" => {
-  const [systemDark, setSystemDark] = React.useState(
-    () => window.matchMedia("(prefers-color-scheme: dark)").matches,
+// Live preview state, seeded from the shared store for the first paint and then
+// kept current by the manager's broadcasts.
+let currentChoice: ThemeChoice = readThemeChoice();
+let currentBrand: BrandChoice = readBrandChoice();
+
+const applyNow = () =>
+  applyThemeAttrs(document, resolveTheme(currentChoice), currentBrand);
+
+// Paint the initial theme before any story/docs renders.
+applyNow();
+
+// Track the OS while on System, and follow the manager's toolbar.
+window
+  .matchMedia("(prefers-color-scheme: dark)")
+  .addEventListener("change", () => {
+    if (currentChoice === "system") applyNow();
+  });
+channel.on(THEME_EVENT, (payload: { choice?: ThemeChoice }) => {
+  if (payload?.choice) currentChoice = payload.choice;
+  applyNow();
+});
+channel.on(BRAND_EVENT, (payload: { brand?: BrandChoice }) => {
+  if (payload?.brand) currentBrand = payload.brand;
+  applyNow();
+});
+
+// Ask the manager to re-broadcast the current state — covers iframe (re)loads,
+// where this preview bundle re-evaluates but the manager keeps its state.
+channel.emit(REQUEST_EVENT);
+
+// Resolved theme as React state, for components (the docs container) that must
+// re-render — mirrors the module-level listeners above.
+const useResolvedTheme = (): ResolvedTheme => {
+  const [resolved, setResolved] = React.useState<ResolvedTheme>(() =>
+    resolveTheme(currentChoice),
   );
 
   React.useEffect(() => {
-    if (choice !== "system") return;
+    const update = () => setResolved(resolveTheme(currentChoice));
     const mq = window.matchMedia("(prefers-color-scheme: dark)");
-    const onChange = () => setSystemDark(mq.matches);
-    onChange();
-    mq.addEventListener("change", onChange);
-    return () => mq.removeEventListener("change", onChange);
-  }, [choice]);
+    channel.on(THEME_EVENT, update);
+    mq.addEventListener("change", update);
+    update();
+    return () => {
+      channel.off(THEME_EVENT, update);
+      mq.removeEventListener("change", update);
+    };
+  }, []);
 
-  if (choice === "light" || choice === "dark") return choice;
-  return systemDark ? "dark" : "light";
+  return resolved;
 };
 
-// Page (html/body) background per App theme. Mirrors --ds-color-bg-default
-// (white / slate-950). The semantic @theme aliases (--color-canvas) can't be
-// used here: Tailwind declares them at :root and they resolve once against
-// <html>'s data-theme — which carries the Content theme (see withTheme) so
-// components render correctly — so we set the App background color directly.
-const APP_BG: Record<"light" | "dark", string> = {
-  light: "#ffffff",
-  dark: "#020617",
-};
-const applyAppBackground = (mode: "light" | "dark") => {
-  document.documentElement.style.backgroundColor = APP_BG[mode];
-  document.body.style.backgroundColor = APP_BG[mode];
-};
+// Static story wrapper — the active theme lives on <html> (applied above), so
+// `bg-canvas`/`text-fg` resolve correctly; no per-story theme side effects.
+const withTheme: Decorator = (Story) => (
+  <div className="min-h-svh bg-canvas p-6 text-fg">
+    <Story />
+  </div>
+);
 
-const withTheme: Decorator = (Story, context) => {
-  const { app, content, brand } = context.globals;
-  const contentTheme = useResolvedTheme(content ?? "system");
-  const appTheme = useResolvedTheme(app ?? "system");
-
-  React.useEffect(() => {
-    const root = document.documentElement;
-    // Components resolve the semantic --color-* aliases at :root, so the Content
-    // theme must live on <html> for the story (and embedded docs examples) to
-    // render correctly. Brand (accent tokens) rides along with the content.
-    root.setAttribute("data-theme", contentTheme);
-    if (brand && brand !== "default") {
-      root.setAttribute("data-brand", brand);
-    } else {
-      root.removeAttribute("data-brand");
-    }
-    // The page background (html/body) instead follows the App (chrome) theme, so
-    // it matches the sidebar/toolbar; the story canvas keeps Content below.
-    applyAppBackground(appTheme);
-  }, [contentTheme, appTheme, brand]);
-
-  return (
-    <div className="min-h-svh bg-canvas p-6 text-fg">
-      <Story />
-    </div>
-  );
-};
-
-// Docs (MDX / autodocs) pages render in the preview pane but read like part of
-// the Storybook reading shell, so the doc page + prose follow the App (chrome)
-// theme — keeping them consistent with the sidebar/toolbar. The component
-// examples embedded in the page still follow the Content theme via withTheme.
-//
-// The DocsContainer is not a decorator/story function, so Storybook preview
-// hooks (useGlobals) can't be used here; we read the `app` global from the
-// docs channel with plain React hooks instead.
+// Docs pages follow the same toolbar theme as the stories. The DocsContainer's
+// emotion theme isn't driven by <html>, so feed it the resolved theme directly.
 const ThemedDocsContainer = (
   props: React.PropsWithChildren<DocsContainerProps>,
 ) => {
-  const { context } = props;
-
-  const readApp = React.useCallback((): string => {
-    try {
-      return (
-        context.getStoryContext(context.storyById()).globals?.app ?? "system"
-      );
-    } catch {
-      return "system";
-    }
-  }, [context]);
-
-  const [appChoice, setAppChoice] = React.useState(readApp);
-
-  React.useEffect(() => {
-    const onUpdate = (payload: { globals?: Record<string, unknown> }) => {
-      const next = payload?.globals?.app;
-      if (typeof next === "string") setAppChoice(next);
-    };
-    context.channel.on(GLOBALS_UPDATED, onUpdate);
-    return () => context.channel.off(GLOBALS_UPDATED, onUpdate);
-  }, [context]);
-
-  const theme = useResolvedTheme(appChoice);
-
-  // Paint the docs page background with the App theme too, covering pure-MDX
-  // pages that render no story (so no withTheme decorator runs). data-theme on
-  // <html> is left to the embedded examples' Content theme via withTheme.
-  React.useEffect(() => {
-    applyAppBackground(theme);
-  }, [theme]);
-
-  return <DocsContainer {...props} theme={themeFor(theme)} />;
+  const resolved = useResolvedTheme();
+  return <DocsContainer {...props} theme={themeFor(resolved)} />;
 };
 
 const preview: Preview = {
@@ -140,48 +111,8 @@ const preview: Preview = {
     // (axe.configure options, e.g. disabling a rule), and `options` — see
     // https://www.chromatic.com/docs/accessibility/configure/.
     a11y: { test: "error" },
-    // Docs pages follow the App (chrome) theme — see ThemedDocsContainer.
+    // Docs pages follow the single Theme toolbar — see ThemedDocsContainer.
     docs: { container: ThemedDocsContainer },
-  },
-  globalTypes: {
-    // Themes the Storybook chrome (sidebar/toolbar). Read and applied by the
-    // manager addon in manager.tsx; has no effect on the story canvas.
-    app: {
-      description: "Storybook app (chrome) theme",
-      toolbar: {
-        title: "App",
-        icon: "browser",
-        items: [...THEME_ITEMS],
-        dynamicTitle: true,
-      },
-    },
-    // Themes the story canvas, independently of the chrome.
-    content: {
-      description: "Content (canvas) theme",
-      toolbar: {
-        title: "Content",
-        icon: "component",
-        items: [...THEME_ITEMS],
-        dynamicTitle: true,
-      },
-    },
-    brand: {
-      description: "Brand",
-      toolbar: {
-        title: "Brand",
-        icon: "paintbrush",
-        items: [
-          { value: "default", title: "Default" },
-          { value: "acme", title: "Acme" },
-        ],
-        dynamicTitle: true,
-      },
-    },
-  },
-  initialGlobals: {
-    app: "system",
-    content: "system",
-    brand: "default",
   },
   decorators: [withTheme],
 };
