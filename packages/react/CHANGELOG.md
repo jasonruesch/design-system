@@ -1,5 +1,11 @@
 # @jasonruesch/react
 
+## 0.3.5
+
+### Patch Changes
+
+- [`c0a393b`](https://github.com/jasonruesch/design-system/commit/c0a393b74fefa19692b7f4d899d0cec05259ade5) Thanks [@jasonruesch](https://github.com/jasonruesch)! - Use the shared `Spinner` component for `Button`'s loading state instead of a duplicate inline SVG, so the spinner stays consistent with the rest of the design system.
+
 ## 0.3.4
 
 ### Patch Changes
